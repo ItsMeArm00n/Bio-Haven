@@ -112,13 +112,11 @@ export default function HomePage() {
             </motion.div>
 
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight leading-tight">
-              Bio-Structural
-              <br />
-              <span className="text-[#81c784]">Innovations</span>
+              Bio Haven
             </h1>
 
             <p className="text-xl md:text-2xl lg:text-3xl text-white/95 mb-10 max-w-4xl mx-auto leading-relaxed font-light">
-              Where Nature Meets Technology: Revolutionary Solutions for Sustainable Living
+              Smart Bio-Structural Systems for a Sustainable Future
             </p>
 
             <motion.div
@@ -130,6 +128,7 @@ export default function HomePage() {
               <Button
                 size="lg"
                 className="bg-white text-[#2e7d32] hover:bg-white/90 font-semibold text-lg px-8 py-6 shadow-2xl"
+                onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
               >
                 Explore Our Projects
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -178,7 +177,7 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      <section className="py-24 container mx-auto px-4 lg:px-6">
+      <section id="projects" className="py-24 container mx-auto px-4 lg:px-6">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
@@ -198,7 +197,7 @@ export default function HomePage() {
           whileInView="animate"
           viewport={{ once: true }}
         >
-          {/* BioSync Panel */}
+          {/* BioSync Panel - Left (20cm width equivalent) */}
           <motion.div variants={fadeInUp}>
             <Card className="h-full bg-gradient-to-br from-[#2E7D32] to-[#1B5E20] text-white border-none shadow-2xl hover:shadow-3xl transition-all duration-300 relative overflow-hidden group">
               {/* Particle Effect */}
@@ -259,12 +258,13 @@ export default function HomePage() {
                     </TableHeader>
                     <TableBody>
                       {[
-                        { component: "Arduino Nano", function: "Controller", cost: "$5-8" },
+                        { component: "Arduino Nano / ESP32", function: "Controller", cost: "$5-8" },
                         { component: "Soil Sensor", function: "Moisture level", cost: "$2" },
                         { component: "LDR", function: "Light intensity", cost: "$1" },
                         { component: "DHT22", function: "Temp & humidity", cost: "$3" },
-                        { component: "Solar Panel", function: "Power supply", cost: "$10" },
+                        { component: "Solar Panel (10W)", function: "Power supply", cost: "$10" },
                         { component: "Mini Pump", function: "Watering", cost: "$3" },
+                        { component: "Recycled Chassis", function: "Structure", cost: "$0-5" },
                       ].map((row, i) => (
                         <motion.tr
                           key={i}
@@ -281,6 +281,28 @@ export default function HomePage() {
                       ))}
                     </TableBody>
                   </Table>
+                </div>
+
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/20">
+                  <h4 className="font-display font-semibold mb-3 text-lg">Working Principle</h4>
+                  <ol className="space-y-2 text-white/90 text-sm">
+                    <li className="flex gap-2">
+                      <span className="font-bold">1.</span>
+                      <span>Sensors collect data</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="font-bold">2.</span>
+                      <span>Arduino decides: water, shade, or idle</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="font-bold">3.</span>
+                      <span>Runs completely on solar energy</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="font-bold">4.</span>
+                      <span>Displays data or logs it for analysis</span>
+                    </li>
+                  </ol>
                 </div>
 
                 <div className="space-y-4">
@@ -324,11 +346,11 @@ export default function HomePage() {
             </Card>
           </motion.div>
 
-          {/* Smart Healing Concrete Panel */}
-          <motion.div variants={fadeInUp}>
-            <Card className="h-full bg-gradient-to-br from-[#5D4037] via-[#4E342E] to-[#3E2723] text-white border-none shadow-2xl hover:shadow-3xl transition-shadow duration-300 relative overflow-hidden">
+          {/* Smart Healing Concrete Panel - Center (38cm width equivalent) */}
+          <motion.div variants={fadeInUp} className="lg:col-span-1">
+            <Card className="h-full bg-gradient-to-br from-[#388e3c] via-[#2e7d32] to-[#1b5e20] text-white border-none shadow-2xl hover:shadow-3xl transition-shadow duration-300 relative overflow-hidden">
               <div className="absolute inset-0 opacity-10">
-                <div className="absolute inset-0 bg-[url('/concrete-texture.jpg')] bg-cover" />
+                <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,.1)_50%,transparent_75%)] bg-[length:250%_250%] animate-shimmer" />
               </div>
 
               <CardHeader className="relative z-10">
@@ -338,33 +360,35 @@ export default function HomePage() {
                   </div>
                   <CardTitle className="font-display text-3xl">Smart Healing Concrete</CardTitle>
                 </div>
-                <CardDescription className="text-white/90 text-lg">When Chemistry Meets Electronics</CardDescription>
+                <CardDescription className="text-white/90 text-lg font-medium">
+                  When Chemistry Meets Electronics
+                </CardDescription>
               </CardHeader>
 
               <CardContent className="space-y-6 relative z-10">
-                <p className="text-white/90 leading-relaxed">
+                <p className="text-white/95 leading-relaxed">
                   Concrete that heals cracks chemically while Arduino sensors detect and verify the repair. Features
                   recycled-graphite self-healing circuit for automated electrical recovery.
                 </p>
 
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
                   <h4 className="font-display font-semibold mb-3 text-lg">Materials & Proportions</h4>
                   <Table>
                     <TableHeader>
                       <TableRow className="border-white/20 hover:bg-white/5">
-                        <TableHead className="text-white/80">Item</TableHead>
-                        <TableHead className="text-white/80">Quantity</TableHead>
-                        <TableHead className="text-white/80">Purpose</TableHead>
+                        <TableHead className="text-white/90 font-semibold">Item</TableHead>
+                        <TableHead className="text-white/90 font-semibold">Quantity</TableHead>
+                        <TableHead className="text-white/90 font-semibold">Purpose</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {[
-                        { item: "Cement", quantity: "1 cup", purpose: "Binder" },
-                        { item: "Sand", quantity: "2 cups", purpose: "Filler" },
-                        { item: "Baking Soda", quantity: "2-3 tsp", purpose: "Healing agent" },
-                        { item: "Water", quantity: "½ cup", purpose: "Mixing" },
+                        { item: "Cement", quantity: "1 cup (~250g)", purpose: "Binder" },
+                        { item: "Sand", quantity: "2 cups (~500g)", purpose: "Filler" },
+                        { item: "Baking Soda", quantity: "2-3 tsp (~10-15g)", purpose: "Healing agent" },
+                        { item: "Water", quantity: "½ cup (~120mL)", purpose: "Mixing" },
                         { item: "CaCl₂ Solution", quantity: "10-15g/100mL", purpose: "Healing trigger" },
-                        { item: "Copper Foil", quantity: "5-10mm strips", purpose: "Crack sensor" },
+                        { item: "Copper Foil Tape", quantity: "5-10mm strips", purpose: "Crack sensor" },
                       ].map((row, i) => (
                         <motion.tr
                           key={i}
@@ -374,20 +398,68 @@ export default function HomePage() {
                           transition={{ delay: i * 0.1 }}
                           viewport={{ once: true }}
                         >
-                          <TableCell className="text-white/90">{row.item}</TableCell>
-                          <TableCell className="text-white/80 text-sm">{row.quantity}</TableCell>
-                          <TableCell className="text-white/80 text-sm">{row.purpose}</TableCell>
+                          <TableCell className="text-white/95 font-medium">{row.item}</TableCell>
+                          <TableCell className="text-white/85 text-sm">{row.quantity}</TableCell>
+                          <TableCell className="text-white/85 text-sm">{row.purpose}</TableCell>
                         </motion.tr>
                       ))}
                     </TableBody>
                   </Table>
                 </div>
 
-                <div className="bg-[#81D4FA]/20 backdrop-blur-sm rounded-lg p-4">
+                <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4 border border-white/30">
                   <h4 className="font-display font-semibold mb-2 text-lg">Chemical Reaction</h4>
-                  <p className="font-mono text-sm text-white/90 text-center">
+                  <p className="font-mono text-sm text-white/95 text-center py-2">
                     CaCl₂ + 2 NaHCO₃ → 2 NaCl + CaCO₃↓ + H₂O + CO₂↑
                   </p>
+                </div>
+
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                  <h4 className="font-display font-semibold mb-3 text-lg">Process</h4>
+                  <ol className="space-y-2 text-white/90 text-sm">
+                    <li className="flex gap-2">
+                      <span className="font-bold">1.</span>
+                      <span>Mix cement + sand + baking soda; pour into mold</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="font-bold">2.</span>
+                      <span>Embed copper foil tracks; cure 24-48h</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="font-bold">3.</span>
+                      <span>Create small crack (1-3mm)</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="font-bold">4.</span>
+                      <span>Arduino detects resistance change → alert</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="font-bold">5.</span>
+                      <span>Apply CaCl₂ solution → fizz & white CaCO₃ fills crack in minutes</span>
+                    </li>
+                  </ol>
+                </div>
+
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                  <h4 className="font-display font-semibold mb-3 text-lg">Graphite Self-Healing Circuit</h4>
+                  <ul className="space-y-2 text-white/90 text-sm">
+                    <li className="flex gap-2">
+                      <span>•</span>
+                      <span>Mix 1 tsp gelatin + 1 tsp salt + ½ tsp recycled graphite in 3 tbsp hot water</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span>•</span>
+                      <span>Forms gel wire that reconnects after cutting</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span>•</span>
+                      <span>Graphite stored in recycled-plastic micro-capsules</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span>•</span>
+                      <span>Burst on wire damage to restore conductivity</span>
+                    </li>
+                  </ul>
                 </div>
 
                 <div className="space-y-3">
@@ -397,32 +469,33 @@ export default function HomePage() {
                   </h4>
                   <ul className="space-y-2">
                     {[
-                      "Instant crack detection & repair",
-                      "Self-healing electrical circuits",
-                      "Recycled materials reduce waste",
-                      "Low-cost, scalable solution",
+                      "Instant visible repair (10-15 min)",
+                      "Very low cost (< $10 prototype)",
+                      "Dual healing – chemical and electrical",
+                      "Eco-friendly materials",
+                      "Smart IoT integration for real-time alerts",
                     ].map((text, i) => (
                       <motion.li
                         key={i}
-                        className="flex items-center gap-3 text-white/90"
+                        className="flex items-center gap-3 text-white/95 bg-white/5 p-2 rounded-lg"
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ delay: i * 0.1 }}
                         viewport={{ once: true }}
                       >
-                        <div className="w-2 h-2 bg-[#81D4FA] rounded-full" />
-                        <span>{text}</span>
+                        <div className="w-2 h-2 bg-white rounded-full flex-shrink-0" />
+                        <span className="text-sm">{text}</span>
                       </motion.li>
                     ))}
                   </ul>
                 </div>
 
                 <div className="pt-4">
-                  <p className="text-xl font-display font-semibold mb-4 text-center text-balance">
+                  <p className="text-xl font-display font-semibold mb-4 text-center text-balance leading-tight">
                     "Cracks Detect, Circuits Connect – The Future Builds Itself."
                   </p>
                   <Link href="/smart-healing-concrete">
-                    <Button className="w-full bg-[#81D4FA] text-[#3E2723] hover:bg-[#81D4FA]/90 font-semibold group">
+                    <Button className="w-full bg-white text-[#2e7d32] hover:bg-white/90 font-semibold group py-6 text-base">
                       Explore Smart Healing Concrete
                       <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                     </Button>
@@ -432,9 +505,9 @@ export default function HomePage() {
             </Card>
           </motion.div>
 
-          {/* Feasibility & Vision Panel */}
+          {/* Feasibility & Vision Panel - Right (20cm width equivalent) */}
           <motion.div variants={fadeInUp}>
-            <Card className="h-full bg-white border-2 border-gray-200 shadow-2xl hover:shadow-3xl transition-shadow duration-300 relative overflow-hidden">
+            <Card className="h-full bg-white border-2 border-[#2e7d32]/30 shadow-2xl hover:shadow-3xl transition-shadow duration-300 relative overflow-hidden">
               <div className="absolute inset-0 opacity-5">
                 <div className="absolute inset-0 bg-[linear-gradient(90deg,#2E7D32_1px,transparent_1px),linear-gradient(#2E7D32_1px,transparent_1px)] bg-[size:20px_20px]" />
               </div>
@@ -443,32 +516,38 @@ export default function HomePage() {
                 <CardTitle className="font-display text-3xl text-gray-900">
                   Innovation | Sustainability | Commerce
                 </CardTitle>
-                <CardDescription className="text-gray-600 text-lg">
+                <CardDescription className="text-gray-600 text-lg font-medium">
                   Smart Bio-Structural Systems for a Sustainable Future
                 </CardDescription>
               </CardHeader>
 
               <CardContent className="space-y-6 relative z-10">
-                <div className="bg-gradient-to-br from-[#2E7D32]/10 to-[#81D4FA]/10 rounded-lg p-4">
+                <div className="bg-gradient-to-br from-[#2E7D32]/10 to-[#81c784]/10 rounded-lg p-4 border border-[#2e7d32]/20">
                   <h4 className="font-display font-semibold mb-3 text-lg text-gray-900">Project Comparison</h4>
                   <Table>
                     <TableHeader>
                       <TableRow className="border-gray-200">
-                        <TableHead className="text-gray-700">Feature</TableHead>
-                        <TableHead className="text-gray-700">Concrete</TableHead>
-                        <TableHead className="text-gray-700">BioSync</TableHead>
+                        <TableHead className="text-gray-700 font-semibold">Feature</TableHead>
+                        <TableHead className="text-gray-700 font-semibold">Concrete</TableHead>
+                        <TableHead className="text-gray-700 font-semibold">BioSync</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {[
                         { feature: "Core Field", concrete: "Chemistry + IoT", biosync: "Biology + Robotics" },
-                        { feature: "Power", concrete: "Chemical reaction", biosync: "Solar" },
-                        { feature: "Output", concrete: "Crack repair", biosync: "Plant care" },
-                        { feature: "Cost/unit", concrete: "≈ $10", biosync: "≈ $25" },
+                        { feature: "Power Source", concrete: "Chemical energy", biosync: "Solar" },
+                        { feature: "Key Output", concrete: "Instant crack repair", biosync: "Autonomous plant care" },
+                        {
+                          feature: "Sustainability",
+                          concrete: "Recycled graphite",
+                          biosync: "Water & energy efficiency",
+                        },
+                        { feature: "Cost per unit", concrete: "≈ $10", biosync: "≈ $25" },
+                        { feature: "Potential Users", concrete: "Construction firms", biosync: "Home gardeners" },
                       ].map((row, i) => (
                         <motion.tr
                           key={i}
-                          className="border-gray-200 hover:bg-gray-50"
+                          className="border-gray-200 hover:bg-[#2e7d32]/5"
                           initial={{ opacity: 0 }}
                           whileInView={{ opacity: 1 }}
                           transition={{ delay: i * 0.1 }}
@@ -487,14 +566,17 @@ export default function HomePage() {
                   <h4 className="font-display font-semibold text-lg text-gray-900">Commercial Potential</h4>
                   <div className="grid gap-3">
                     {[
-                      { title: "Construction Firms", desc: "Smart infrastructure monitoring" },
-                      { title: "Urban Farmers", desc: "Automated plant care systems" },
-                      { title: "Educational Institutions", desc: "STEM learning platforms" },
-                      { title: "Smart Cities", desc: "IoT-enabled sustainability" },
+                      { title: "Smart Construction Tech", desc: "IoT crack monitoring kits for bridges & buildings" },
+                      { title: "Eco-Gardening Kits", desc: "BioSync for homes & schools" },
+                      {
+                        title: "Circular Economy Products",
+                        desc: "Use of recycled graphite & plastic capsules",
+                      },
+                      { title: "Startup Opportunity", desc: "Predictive maintenance & eco-IoT solutions" },
                     ].map((item, i) => (
                       <motion.div
                         key={i}
-                        className="p-3 bg-gray-50 rounded-lg border border-gray-200 hover:border-[#2E7D32] transition-colors"
+                        className="p-3 bg-[#2e7d32]/5 rounded-lg border border-[#2e7d32]/20 hover:border-[#2E7D32] hover:bg-[#2e7d32]/10 transition-colors"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.1 }}
@@ -508,19 +590,49 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-r from-[#2E7D32] to-[#5D4037] rounded-lg p-6 text-white">
+                <div className="bg-gradient-to-r from-[#2E7D32] to-[#1b5e20] rounded-lg p-6 text-white">
                   <h4 className="font-display font-semibold text-xl mb-3">Future Vision</h4>
-                  <p className="text-white/90 leading-relaxed text-balance">
-                    Both systems prove that low-cost innovation can create smart, sustainable infrastructure for a
-                    better tomorrow. From self-healing buildings to autonomous gardens, the future is bio-structural.
-                  </p>
+                  <ul className="space-y-2 text-white/95 text-sm">
+                    <li className="flex gap-2">
+                      <span>•</span>
+                      <span>AI-driven growth prediction for plants</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span>•</span>
+                      <span>Networked sensors across buildings for damage mapping</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span>•</span>
+                      <span>Integration of both projects → self-healing, self-monitoring eco-cities</span>
+                    </li>
+                  </ul>
                 </div>
 
-                <div className="text-center pt-4 space-y-2">
-                  <p className="text-sm text-gray-600">
-                    <strong>Team Project</strong> • Grade 10 • Science Innovation
+                <div className="bg-[#2e7d32]/10 rounded-lg p-4 border border-[#2e7d32]/20">
+                  <h4 className="font-display font-semibold text-lg text-gray-900 mb-2">Feasibility Summary</h4>
+                  <Table>
+                    <TableBody>
+                      {[
+                        { aspect: "Technical", feasibility: "Simple reaction + basic Arduino circuit" },
+                        { aspect: "Economic", feasibility: "Low budget, easy scale-up" },
+                        { aspect: "Environmental", feasibility: "Safe materials + recycled graphite" },
+                        { aspect: "Practical", feasibility: "Ideal for demo & smart city monitoring" },
+                      ].map((row, i) => (
+                        <TableRow key={i} className="border-[#2e7d32]/20">
+                          <TableCell className="font-semibold text-gray-900">{row.aspect}</TableCell>
+                          <TableCell className="text-gray-700 text-sm">{row.feasibility}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+
+                <div className="text-center pt-4 space-y-3 border-t border-gray-200">
+                  <p className="font-display font-semibold text-gray-900 text-lg">Feasibility Conclusion</p>
+                  <p className="text-sm text-gray-700 leading-relaxed text-balance">
+                    Both systems prove that low-cost innovation can create smart, sustainable infrastructure.
                   </p>
-                  <p className="text-xs text-gray-500">Mentor: [Your Mentor Name] • School: [Your School Name]</p>
+                  <p className="text-xs text-gray-500 pt-2">Team Members | Grade 10 | School Name | Mentor</p>
                 </div>
               </CardContent>
             </Card>

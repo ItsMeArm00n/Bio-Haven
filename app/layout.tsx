@@ -16,9 +16,9 @@ const montserrat = Montserrat({
 })
 
 export const metadata: Metadata = {
-  title: "Bio-Structural Innovations | BioSync & Smart Healing Concrete",
+  title: "Bio Haven | BioSync & Smart Healing Concrete",
   description:
-    "Innovative projects combining nature and technology: BioSync solar-powered plant care and Smart Healing Concrete with self-repair capabilities",
+    "Smart Bio-Structural Systems for a Sustainable Future: BioSync solar-powered plant care and Smart Healing Concrete with self-repair capabilities",
   generator: "v0.app",
 }
 

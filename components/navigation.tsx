@@ -12,6 +12,8 @@ export function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
 
+  const isHealingSection = pathname?.startsWith("/self-healing-systems")
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
@@ -23,16 +25,22 @@ export function Navigation() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/biosync", label: "BioSync", icon: Leaf },
-    { href: "/smart-healing-concrete", label: "Smart Healing Concrete", icon: Hammer },
+    { href: "/self-healing-systems", label: "Self-Healing Systems", icon: Hammer },
     { href: "/gallery", label: "Gallery" },
     { href: "/team", label: "Team & Credits" },
   ]
+
+  const primaryColor = isHealingSection ? "#616161" : "#2E7D32"
+  const hoverBg = isHealingSection ? "hover:bg-gray-50" : "hover:bg-green-50"
+  const textColor = isHealingSection ? "text-gray-700" : "text-gray-700"
+  const activeColor = isHealingSection ? "text-gray-900" : "text-[#2E7D32]"
+  const borderColor = isHealingSection ? "border-gray-100" : "border-green-100"
 
   return (
     <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/98 backdrop-blur-md shadow-lg border-b border-green-100"
+          ? `bg-white/98 backdrop-blur-md shadow-lg border-b ${borderColor}`
           : "bg-gradient-to-b from-black/60 to-transparent"
       }`}
       initial={{ y: -100 }}
@@ -45,15 +53,23 @@ export function Navigation() {
           <Link href="/">
             <motion.div className="flex items-center gap-3 cursor-pointer group" whileHover={{ scale: 1.05 }}>
               <div className="relative">
-                <div className="absolute inset-0 bg-[#2E7D32] rounded-xl blur-md opacity-50 group-hover:opacity-75 transition-opacity" />
-                <div className="relative bg-gradient-to-br from-[#2E7D32] to-[#1B5E20] p-2.5 rounded-xl shadow-lg">
+                <div
+                  className="absolute inset-0 rounded-xl blur-md opacity-50 group-hover:opacity-75 transition-opacity"
+                  style={{ backgroundColor: primaryColor }}
+                />
+                <div
+                  className="relative p-2.5 rounded-xl shadow-lg"
+                  style={{
+                    background: `linear-gradient(to bottom right, ${primaryColor}, ${isHealingSection ? "#424242" : "#1B5E20"})`,
+                  }}
+                >
                   <Leaf className="w-6 h-6 text-white" />
                 </div>
               </div>
               <span
                 className={`font-display font-bold text-xl tracking-tight transition-colors ${scrolled ? "text-gray-900" : "text-white drop-shadow-lg"}`}
               >
-                Bio-Structural Innovations
+                Bio Haven
               </span>
             </motion.div>
           </Link>
@@ -68,7 +84,7 @@ export function Navigation() {
                     variant="ghost"
                     className={`relative px-4 py-2 transition-all ${
                       scrolled
-                        ? `text-gray-700 hover:text-[#2E7D32] hover:bg-green-50 ${isActive ? "text-[#2E7D32] font-semibold" : ""}`
+                        ? `${textColor} ${hoverBg} ${isActive ? activeColor + " font-semibold" : ""}`
                         : `text-white hover:text-white/90 hover:bg-white/10 ${isActive ? "font-semibold" : ""}`
                     }`}
                   >
@@ -76,7 +92,8 @@ export function Navigation() {
                     {link.label}
                     {isActive && (
                       <motion.div
-                        className={`absolute bottom-0 left-0 right-0 h-0.5 ${scrolled ? "bg-[#2E7D32]" : "bg-white"}`}
+                        className={`absolute bottom-0 left-0 right-0 h-0.5`}
+                        style={{ backgroundColor: scrolled ? primaryColor : "white" }}
                         layoutId="activeNav"
                       />
                     )}
@@ -90,7 +107,7 @@ export function Navigation() {
           <Button
             variant="ghost"
             size="icon"
-            className={`lg:hidden ${scrolled ? "text-gray-900 hover:bg-green-50" : "text-white hover:bg-white/10"}`}
+            className={`lg:hidden ${scrolled ? `text-gray-900 ${hoverBg}` : "text-white hover:bg-white/10"}`}
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -102,7 +119,7 @@ export function Navigation() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="lg:hidden bg-white border-t border-green-100 shadow-xl"
+            className={`lg:hidden bg-white border-t ${borderColor} shadow-xl`}
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
@@ -115,7 +132,8 @@ export function Navigation() {
                   <Link key={link.href} href={link.href}>
                     <Button
                       variant={isActive ? "default" : "ghost"}
-                      className={`w-full justify-start ${isActive ? "bg-[#2E7D32] text-white hover:bg-[#1B5E20]" : "text-gray-700 hover:bg-green-50 hover:text-[#2E7D32]"}`}
+                      className={`w-full justify-start ${isActive ? `text-white` : `${textColor} ${hoverBg}`}`}
+                      style={isActive ? { backgroundColor: primaryColor } : {}}
                       onClick={() => setIsOpen(false)}
                     >
                       {link.icon && <link.icon className="w-4 h-4 mr-2" />}
