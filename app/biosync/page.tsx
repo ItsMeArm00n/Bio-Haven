@@ -113,7 +113,12 @@ export default function BioSyncPage() {
       </section>
 
       {/* Key Highlights */}
-      <section className="py-20 container mx-auto px-4">
+      <section className="py-20 container mx-auto px-4 bg-white relative overflow-hidden">
+        {/* Decorative Background Elements */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-10 left-10 w-32 h-32 bg-[#2e7d32] rounded-full blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-40 h-40 bg-[#2e7d32] rounded-full blur-3xl"></div>
+        </div>
         <motion.div
           className="grid md:grid-cols-3 gap-8"
           initial="initial"
@@ -143,7 +148,7 @@ export default function BioSyncPage() {
             {
               icon: Leaf,
               title: "Eco-Friendly",
-              description: "Built from recycled materials, saves 60% water through precision irrigation",
+              description: "Saves water & reduces waste with precision plant care",
               color: "#81c784",
             },
           ].map((item, i) => (
@@ -175,8 +180,15 @@ export default function BioSyncPage() {
         </motion.div>
       </section>
 
-      <section className="py-20 bg-[#2e7d32]/5">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-[#2e7d32]/10 relative overflow-hidden">
+        {/* Decorative Grid Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle, #2e7d32 1px, transparent 1px)`,
+            backgroundSize: '50px 50px'
+          }}></div>
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
@@ -197,18 +209,17 @@ export default function BioSyncPage() {
                     <TableRow className="border-[#2e7d32]/20">
                       <TableHead className="font-semibold text-gray-900">Component</TableHead>
                       <TableHead className="font-semibold text-gray-900">Function</TableHead>
-                      <TableHead className="font-semibold text-gray-900 text-right">Cost (USD)</TableHead>
+                      <TableHead className="font-semibold text-gray-900 text-right">Cost (AED)</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {[
-                      { component: "Arduino Nano / ESP32", function: "Controller", cost: "5-8" },
+                      { component: "Arduino Nano / ESP32", function: "Controller", cost: "18-29" },
                       { component: "Soil Sensor", function: "Moisture level", cost: "2" },
                       { component: "LDR", function: "Light intensity", cost: "1" },
                       { component: "DHT22", function: "Temp & humidity", cost: "3" },
                       { component: "Solar Panel (10 W)", function: "Power supply", cost: "10" },
                       { component: "Mini Pump (optional)", function: "Watering", cost: "3" },
-                      { component: "Recycled Chassis", function: "Structure", cost: "0-5" },
                     ].map((row, i) => (
                       <motion.tr
                         key={i}
@@ -220,14 +231,14 @@ export default function BioSyncPage() {
                       >
                         <TableCell className="font-medium text-gray-900">{row.component}</TableCell>
                         <TableCell className="text-gray-700">{row.function}</TableCell>
-                        <TableCell className="text-gray-900 text-right font-semibold">${row.cost}</TableCell>
+                        <TableCell className="text-gray-900 text-right font-semibold">AED {row.cost}</TableCell>
                       </motion.tr>
                     ))}
                     <TableRow className="border-t-2 border-[#2e7d32]/30 bg-[#2e7d32]/10">
                       <TableCell colSpan={2} className="font-bold text-gray-900">
                         Total Estimated Cost
                       </TableCell>
-                      <TableCell className="text-right font-bold text-[#2e7d32] text-lg">$24-32</TableCell>
+                      <TableCell className="text-right font-bold text-[#2e7d32] text-lg">AED 91-121</TableCell>
                     </TableRow>
                   </TableBody>
                 </Table>
@@ -238,8 +249,15 @@ export default function BioSyncPage() {
       </section>
 
       {/* How It Works */}
-      <section id="how-it-works" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
+      <section id="how-it-works" className="py-20 bg-white relative overflow-hidden">
+        {/* Decorative Leaf Patterns */}
+        <div className="absolute inset-0 opacity-5">
+          <Leaf className="absolute top-20 left-20 w-24 h-24 text-[#2e7d32] rotate-12" />
+          <Leaf className="absolute top-40 right-32 w-20 h-20 text-[#2e7d32] -rotate-45" />
+          <Leaf className="absolute bottom-20 left-1/3 w-28 h-28 text-[#2e7d32] rotate-90" />
+          <Leaf className="absolute bottom-32 right-20 w-16 h-16 text-[#2e7d32] -rotate-12" />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
@@ -372,7 +390,12 @@ export default function BioSyncPage() {
       </section>
 
       {/* Applications */}
-      <section className="py-20 container mx-auto px-4">
+      <section className="py-20 container mx-auto px-4 bg-white relative overflow-hidden">
+        {/* Decorative Background Elements */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-1/4 right-20 w-48 h-48 bg-[#2e7d32] rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 left-20 w-36 h-36 bg-[#81c784] rounded-full blur-3xl"></div>
+        </div>
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -442,10 +465,19 @@ export default function BioSyncPage() {
       </section>
 
       {/* Tagline Section */}
-      <section className="py-20 bg-[#2e7d32]/5">
-        <div className="container mx-auto px-4 text-center">
+      <section className="py-20 bg-gradient-to-br from-[#2e7d32] to-[#1b5e20] relative overflow-hidden">
+        {/* Decorative Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.1) 75%, rgba(255,255,255,0.1)),
+                             linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.1) 75%, rgba(255,255,255,0.1))`,
+            backgroundSize: '60px 60px',
+            backgroundPosition: '0 0, 30px 30px'
+          }}></div>
+        </div>
+        <div className="container mx-auto px-4 text-center relative z-10">
           <motion.h2
-            className="font-display text-4xl md:text-6xl font-bold text-[#2e7d32] text-balance"
+            className="font-display text-4xl md:text-6xl font-bold text-white text-balance"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -456,8 +488,8 @@ export default function BioSyncPage() {
       </section>
 
       {/* Back to Home */}
-      <section className="py-12 bg-white">
-        <div className="container mx-auto px-4 text-center">
+      <section className="py-12 bg-[#2e7d32]/10">
+        <div className="container mx-auto px-4 text-center relative z-10">
           <Link href="/">
             <Button
               size="lg"

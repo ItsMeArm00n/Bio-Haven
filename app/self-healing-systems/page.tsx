@@ -73,7 +73,12 @@ export default function SelfHealingSystemsPage() {
       </section>
 
       {/* Two Main Systems */}
-      <section className="py-20 container mx-auto px-4">
+      <section className="py-20 container mx-auto px-4 bg-white relative overflow-hidden">
+        {/* Decorative Background Elements */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-10 left-10 w-32 h-32 bg-gray-600 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-40 h-40 bg-gray-700 rounded-full blur-3xl"></div>
+        </div>
         <div className="grid md:grid-cols-2 gap-8">
           {/* Self-Healing Concrete */}
           <motion.div
@@ -174,8 +179,16 @@ export default function SelfHealingSystemsPage() {
       </section>
 
       {/* Materials Table */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-gray-200 relative overflow-hidden">
+        {/* Decorative Circuit Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `linear-gradient(90deg, #424242 1px, transparent 1px),
+                             linear-gradient(0deg, #424242 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
+          }}></div>
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
@@ -235,8 +248,15 @@ export default function SelfHealingSystemsPage() {
       </section>
 
       {/* Chemical Reaction */}
-      <section className="py-20 bg-gradient-to-br from-gray-100 to-gray-200">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-white relative overflow-hidden">
+        {/* Decorative Molecules */}
+        <div className="absolute inset-0 opacity-5">
+          <Shield className="absolute top-20 left-20 w-24 h-24 text-gray-600 rotate-12" />
+          <Zap className="absolute top-40 right-32 w-20 h-20 text-gray-700 -rotate-45" />
+          <AlertCircle className="absolute bottom-20 left-1/3 w-28 h-28 text-gray-600 rotate-90" />
+          <CheckCircle className="absolute bottom-32 right-20 w-16 h-16 text-gray-700 -rotate-12" />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             className="max-w-4xl mx-auto text-center"
             initial={{ opacity: 0, y: 30 }}
@@ -249,7 +269,7 @@ export default function SelfHealingSystemsPage() {
             <Card className="bg-white border-2 border-gray-300">
               <CardContent className="p-8">
                 <motion.div
-                  className="text-3xl font-mono text-gray-700 mb-6 font-bold"
+                  className="text-3xl text-gray-700 mb-6 font-semibold"
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
@@ -269,7 +289,14 @@ export default function SelfHealingSystemsPage() {
       </section>
 
       {/* Process Steps */}
-      <section className="py-20 container mx-auto px-4">
+      <section className="py-20 container mx-auto px-4 bg-gray-200 relative overflow-hidden">
+        {/* Decorative Hex Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle, #424242 1.5px, transparent 1.5px)`,
+            backgroundSize: '50px 50px'
+          }}></div>
+        </div>
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -354,8 +381,13 @@ export default function SelfHealingSystemsPage() {
       </section>
 
       {/* Feasibility */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-gray-100 relative overflow-hidden">
+        {/* Decorative Background */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-1/4 right-20 w-48 h-48 bg-gray-600 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 left-20 w-36 h-36 bg-gray-700 rounded-full blur-3xl"></div>
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
@@ -400,7 +432,7 @@ export default function SelfHealingSystemsPage() {
                 <ul className="space-y-3">
                   {[
                     "Instant visible repair (10-15 min)",
-                    "Very low cost (< $10 prototype)",
+                    "Very low cost (< AED 20 prototype)",
                     "Dual healing – chemical and electrical",
                     "Eco-friendly materials",
                     "Smart IoT integration for real-time alerts",
@@ -439,8 +471,8 @@ export default function SelfHealingSystemsPage() {
       </section>
 
       {/* Back to Home */}
-      <section className="py-12 bg-gray-50">
-        <div className="container mx-auto px-4 text-center">
+      <section className="py-12 bg-gray-200">
+        <div className="container mx-auto px-4 text-center relative z-10">
           <Link href="/">
             <Button
               size="lg"

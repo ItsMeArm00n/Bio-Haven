@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, X, Leaf, Hammer } from "lucide-react"
+import { Menu, X, Leaf, Hammer, Settings } from "lucide-react"
 import { usePathname } from "next/navigation"
 
 export function Navigation() {
@@ -26,8 +26,6 @@ export function Navigation() {
     { href: "/", label: "Home" },
     { href: "/biosync", label: "BioSync", icon: Leaf },
     { href: "/self-healing-systems", label: "Self-Healing Systems", icon: Hammer },
-    { href: "/gallery", label: "Gallery" },
-    { href: "/team", label: "Team & Credits" },
   ]
 
   const primaryColor = isHealingSection ? "#616161" : "#2E7D32"
@@ -67,9 +65,12 @@ export function Navigation() {
                 </div>
               </div>
               <span
-                className={`font-display font-bold text-xl tracking-tight transition-colors ${scrolled ? "text-gray-900" : "text-white drop-shadow-lg"}`}
+                className={`font-display font-bold text-xl tracking-tight transition-colors flex items-center gap-1 ${scrolled ? "text-gray-900" : "text-white drop-shadow-lg"}`}
               >
-                Bio Haven
+                Ec
+                <Settings aria-hidden="true" className="inline-block w-[1em] h-[1em] align-middle" />
+                <span className="sr-only">Eco Haven</span>
+                Haven
               </span>
             </motion.div>
           </Link>

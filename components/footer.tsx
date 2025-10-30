@@ -36,7 +36,7 @@ export function Footer() {
           <div>
             <h4 className="font-display font-semibold mb-4 text-lg">Quick Links</h4>
             <ul className="space-y-2">
-              {["Home", "BioSync", "Smart Healing Concrete", "Gallery", "Team & Credits"].map((link) => (
+              {["Home", "BioSync", "Self-Healing Systems", "Gallery", "Team & Credits"].map((link) => (
                 <li key={link}>
                   <Link
                     href={link === "Home" ? "/" : `/${link.toLowerCase().replace(/ /g, "-")}`}
