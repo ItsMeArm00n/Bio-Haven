@@ -6,13 +6,43 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
-import { Leaf, Sun, Zap, TrendingUp, Users, HomeIcon, ArrowLeft, Droplets, Thermometer, Activity } from "lucide-react"
+import { Leaf, Sun, Zap, TrendingUp, Users, HomeIcon, ArrowLeft, Droplets, Thermometer, Activity, ShoppingCart } from "lucide-react"
 import Link from "next/link"
+import { useState } from "react"
+import { ScrollProgress } from "@/components/scroll-progress"
+import { BackToTop } from "@/components/back-to-top"
 
 export default function BioSyncPage() {
+  const [showOrderPopup, setShowOrderPopup] = useState(false)
+
+  const handlePurchase = () => {
+    setShowOrderPopup(true)
+    setTimeout(() => setShowOrderPopup(false), 3000)
+  }
+
   return (
     <div className="min-h-screen bg-white">
+      <ScrollProgress />
       <Navigation />
+
+      {/* Order Confirmation Popup */}
+      {showOrderPopup && (
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -50 }}
+          className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 bg-[#2e7d32] text-white px-8 py-4 rounded-lg shadow-2xl flex items-center gap-3"
+        >
+          <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+            <ShoppingCart className="w-5 h-5" />
+          </div>
+          <div>
+            <p className="font-semibold text-lg">Order Placed Successfully!</p>
+            <p className="text-sm text-white/90">Your materials are on the way</p>
+          </div>
+        </motion.div>
+      )}
+
 
       {/* Hero Section */}
       <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden mt-20">
@@ -27,6 +57,17 @@ export default function BioSyncPage() {
             repeatType: "reverse",
           }}
         />
+
+        {/* Animated Grid Overlay */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '40px 40px'
+          }} />
+        </div>
 
         {/* Animated Plant Growth */}
         <div className="absolute inset-0 opacity-20">
@@ -51,6 +92,38 @@ export default function BioSyncPage() {
               }}
             >
               <Leaf className="w-8 h-8 text-white" />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Floating Circuit Elements */}
+        <div className="absolute inset-0 opacity-20">
+          {[...Array(8)].map((_, i) => (
+            <motion.div
+              key={`circuit-${i}`}
+              className="absolute w-16 h-16"
+              style={{
+                left: `${10 + Math.random() * 80}%`,
+                top: `${10 + Math.random() * 80}%`,
+              }}
+              animate={{
+                y: [0, -30, 0],
+                rotate: [0, 360],
+                opacity: [0.3, 0.7, 0.3],
+              }}
+              transition={{
+                duration: 8 + Math.random() * 4,
+                repeat: Number.POSITIVE_INFINITY,
+                delay: Math.random() * 2,
+                ease: "easeInOut",
+              }}
+            >
+              <div className="relative w-full h-full">
+                <div className="absolute inset-0 border-2 border-white/40 rounded-lg" />
+                <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-white/60 rounded-full transform -translate-x-1/2 -translate-y-1/2" />
+                <div className="absolute top-0 right-0 w-1 h-4 bg-white/40" />
+                <div className="absolute bottom-0 left-0 w-1 h-4 bg-white/40" />
+              </div>
             </motion.div>
           ))}
         </div>
@@ -122,8 +195,7 @@ export default function BioSyncPage() {
         <motion.div
           className="grid md:grid-cols-3 gap-8"
           initial="initial"
-          whileInView="animate"
-          viewport={{ once: true }}
+          animate="animate"
           variants={{
             animate: {
               transition: {
@@ -159,19 +231,30 @@ export default function BioSyncPage() {
                 animate: { opacity: 1, y: 0 },
               }}
             >
-              <Card className="h-full border-2 border-[#2e7d32]/20 hover:border-[#2E7D32] transition-all duration-300 hover:shadow-2xl group">
-                <CardHeader>
+              <Card className="h-full border-2 border-[#2e7d32]/20 hover:border-[#2E7D32] transition-all duration-300 hover:shadow-2xl group relative overflow-hidden">
+                {/* Animated background gradient on hover */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-br from-[#2e7d32]/0 to-[#2e7d32]/0 group-hover:from-[#2e7d32]/5 group-hover:to-[#2e7d32]/10 transition-all duration-500"
+                />
+                <CardHeader className="relative z-10">
                   <motion.div
-                    className="w-16 h-16 rounded-full flex items-center justify-center mb-4 mx-auto"
+                    className="w-16 h-16 rounded-full flex items-center justify-center mb-4 mx-auto relative"
                     style={{ backgroundColor: `${item.color}20` }}
                     whileHover={{ rotate: 360, scale: 1.1 }}
                     transition={{ duration: 0.6 }}
                   >
-                    <item.icon className="w-8 h-8" style={{ color: item.color }} />
+                    <motion.div
+                      className="absolute inset-0 rounded-full"
+                      style={{ backgroundColor: item.color }}
+                      initial={{ scale: 0, opacity: 0 }}
+                      whileHover={{ scale: 1, opacity: 0.2 }}
+                      transition={{ duration: 0.4 }}
+                    />
+                    <item.icon className="w-8 h-8 relative z-10" style={{ color: item.color }} />
                   </motion.div>
                   <CardTitle className="font-display text-2xl text-center">{item.title}</CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="relative z-10">
                   <p className="text-gray-600 text-center leading-relaxed">{item.description}</p>
                 </CardContent>
               </Card>
@@ -210,6 +293,7 @@ export default function BioSyncPage() {
                       <TableHead className="font-semibold text-gray-900">Component</TableHead>
                       <TableHead className="font-semibold text-gray-900">Function</TableHead>
                       <TableHead className="font-semibold text-gray-900 text-right">Cost (AED)</TableHead>
+                      <TableHead className="font-semibold text-gray-900 text-center">Purchase</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -232,6 +316,16 @@ export default function BioSyncPage() {
                         <TableCell className="font-medium text-gray-900">{row.component}</TableCell>
                         <TableCell className="text-gray-700">{row.function}</TableCell>
                         <TableCell className="text-gray-900 text-right font-semibold">AED {row.cost}</TableCell>
+                        <TableCell className="text-center">
+                          <Button
+                            size="sm"
+                            onClick={handlePurchase}
+                            className="bg-[#2e7d32] hover:bg-[#1b5e20] text-white"
+                          >
+                            <ShoppingCart className="w-4 h-4 mr-1" />
+                            Buy
+                          </Button>
+                        </TableCell>
                       </motion.tr>
                     ))}
                     <TableRow className="border-t-2 border-[#2e7d32]/30 bg-[#2e7d32]/10">
@@ -239,6 +333,15 @@ export default function BioSyncPage() {
                         Total Estimated Cost
                       </TableCell>
                       <TableCell className="text-right font-bold text-[#2e7d32] text-lg">AED 91-121</TableCell>
+                      <TableCell className="text-center">
+                        <Button
+                          onClick={handlePurchase}
+                          className="bg-[#2e7d32] hover:bg-[#1b5e20] text-white font-bold"
+                        >
+                          <ShoppingCart className="w-4 h-4 mr-2" />
+                          Buy All
+                        </Button>
+                      </TableCell>
                     </TableRow>
                   </TableBody>
                 </Table>
@@ -504,6 +607,7 @@ export default function BioSyncPage() {
       </section>
 
       <Footer />
+      <BackToTop />
     </div>
   )
 }

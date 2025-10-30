@@ -31,6 +31,7 @@ export function Navigation() {
   const primaryColor = isHealingSection ? "#616161" : "#2E7D32"
   const hoverBg = isHealingSection ? "hover:bg-gray-50" : "hover:bg-green-50"
   const textColor = isHealingSection ? "text-gray-700" : "text-gray-700"
+  const hoverTextColor = isHealingSection ? "hover:text-gray-900" : "hover:text-gray-900"
   const activeColor = isHealingSection ? "text-gray-900" : "text-[#2E7D32]"
   const borderColor = isHealingSection ? "border-gray-100" : "border-green-100"
 
@@ -65,10 +66,10 @@ export function Navigation() {
                 </div>
               </div>
               <span
-                className={`font-display font-bold text-xl tracking-tight transition-colors flex items-center gap-1 ${scrolled ? "text-gray-900" : "text-white drop-shadow-lg"}`}
+                className={`font-display font-bold text-xl tracking-tight transition-colors flex items-center gap-0.5 ${scrolled ? "text-gray-900" : "text-white drop-shadow-lg"}`}
               >
                 Ec
-                <Settings aria-hidden="true" className="inline-block w-[1em] h-[1em] align-middle" />
+                <Settings aria-hidden="true" className="inline-block w-[0.9em] h-[0.9em] align-middle" />
                 <span className="sr-only">Eco Haven</span>
                 Haven
               </span>
@@ -83,21 +84,29 @@ export function Navigation() {
                 <Link key={link.href} href={link.href}>
                   <Button
                     variant="ghost"
-                    className={`relative px-4 py-2 transition-all ${
+                    className={`relative px-4 py-2 transition-all group ${
                       scrolled
-                        ? `${textColor} ${hoverBg} ${isActive ? activeColor + " font-semibold" : ""}`
+                        ? `${textColor} ${hoverBg} ${hoverTextColor} ${isActive ? activeColor + " font-semibold" : ""}`
                         : `text-white hover:text-white/90 hover:bg-white/10 ${isActive ? "font-semibold" : ""}`
                     }`}
                   >
-                    {link.icon && <link.icon className="w-4 h-4 mr-2" />}
-                    {link.label}
+                    <span className="flex items-center gap-2 relative z-10">
+                      {link.icon && <link.icon className="w-4 h-4 transition-transform group-hover:scale-110 group-hover:rotate-3" />}
+                      {link.label}
+                    </span>
                     {isActive && (
                       <motion.div
                         className={`absolute bottom-0 left-0 right-0 h-0.5`}
                         style={{ backgroundColor: scrolled ? primaryColor : "white" }}
                         layoutId="activeNav"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
                       />
                     )}
+                    {/* Hover effect background */}
+                    <motion.div
+                      className="absolute inset-0 rounded-md opacity-0 group-hover:opacity-100 transition-opacity"
+                      style={{ backgroundColor: scrolled ? `${primaryColor}15` : "rgba(255,255,255,0.1)" }}
+                    />
                   </Button>
                 </Link>
               )

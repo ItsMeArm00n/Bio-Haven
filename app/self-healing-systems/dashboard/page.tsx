@@ -78,57 +78,92 @@ export default function SelfHealingDashboard() {
           <p className="text-xl text-gray-800">Real-time monitoring of autonomous repair technology</p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
-          <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
+        <div className="space-y-6">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
             <Card className="border-2 border-gray-400 bg-white shadow-2xl">
-              <CardHeader className="bg-gradient-to-r from-gray-100 to-gray-200">
-                <CardTitle className="flex items-center gap-2 text-2xl">
-                  <Activity className="w-6 h-6 text-gray-700" />
+              <CardHeader className="bg-gradient-to-r from-gray-100 to-gray-200 py-4">
+                <CardTitle className="flex items-center gap-2 text-xl">
+                  <Activity className="w-5 h-5 text-gray-700" />
                   Self-Healing Concrete Monitor
                 </CardTitle>
               </CardHeader>
-              <CardContent className="p-8">
-                <div className="relative bg-gradient-to-br from-[#78909c] to-[#546e7a] rounded-xl p-8 mb-6 min-h-[450px] flex items-center justify-center shadow-inner">
+              <CardContent className="p-6">
+                <div className="relative bg-gradient-to-br from-[#78909c] to-[#546e7a] rounded-xl p-6 mb-4 min-h-[350px] flex items-center justify-center shadow-inner">
                   <svg viewBox="0 0 400 300" className="w-full max-w-md">
                     <defs>
-                      {/* Brick texture gradient */}
+                      {/* Enhanced Brick texture gradient */}
                       <linearGradient id="brickGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#a1887f" />
-                        <stop offset="50%" stopColor="#8d6e63" />
-                        <stop offset="100%" stopColor="#795548" />
+                        <stop offset="0%" stopColor="#bf8e7a" />
+                        <stop offset="30%" stopColor="#a1887f" />
+                        <stop offset="60%" stopColor="#8d6e63" />
+                        <stop offset="100%" stopColor="#6d4c41" />
                       </linearGradient>
-                      {/* Mortar pattern */}
-                      <pattern id="brickPattern" x="0" y="0" width="100" height="50" patternUnits="userSpaceOnUse">
-                        <rect width="100" height="50" fill="url(#brickGradient)" />
-                        <rect width="98" height="48" x="1" y="1" fill="#a1887f" />
-                        {/* Brick texture details */}
-                        <rect width="30" height="2" x="5" y="10" fill="#8d6e63" opacity="0.3" />
-                        <rect width="25" height="2" x="40" y="15" fill="#8d6e63" opacity="0.3" />
-                        <rect width="35" height="2" x="10" y="30" fill="#8d6e63" opacity="0.3" />
+                      {/* Brick surface texture */}
+                      <pattern id="brickTexture" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <rect width="20" height="20" fill="#9e8578" opacity="0.3" />
+                        <circle cx="5" cy="5" r="0.5" fill="#8d6e63" opacity="0.4" />
+                        <circle cx="15" cy="12" r="0.5" fill="#8d6e63" opacity="0.4" />
+                        <circle cx="8" cy="16" r="0.5" fill="#8d6e63" opacity="0.4" />
                       </pattern>
+                      {/* Mortar gradient */}
+                      <linearGradient id="mortarGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#bdbdbd" />
+                        <stop offset="50%" stopColor="#e0e0e0" />
+                        <stop offset="100%" stopColor="#bdbdbd" />
+                      </linearGradient>
                     </defs>
 
-                    {/* Main brick with realistic texture */}
+                    {/* Background shadow for depth */}
+                    <rect
+                      x="54"
+                      y="54"
+                      width="300"
+                      height="200"
+                      fill="#424242"
+                      opacity="0.3"
+                      rx="3"
+                    />
+
+                    {/* Main brick with enhanced texture */}
                     <rect
                       x="50"
                       y="50"
                       width="300"
                       height="200"
-                      fill="url(#brickPattern)"
+                      fill="url(#brickGradient)"
                       stroke="#5d4037"
-                      strokeWidth="4"
+                      strokeWidth="3"
+                      rx="3"
+                    />
+                    
+                    {/* Texture overlay */}
+                    <rect
+                      x="50"
+                      y="50"
+                      width="300"
+                      height="200"
+                      fill="url(#brickTexture)"
                       rx="3"
                     />
 
-                    {/* Mortar lines for realism */}
-                    <line x1="50" y1="100" x2="350" y2="100" stroke="#9e9e9e" strokeWidth="3" />
-                    <line x1="50" y1="150" x2="350" y2="150" stroke="#9e9e9e" strokeWidth="3" />
-                    <line x1="50" y1="200" x2="350" y2="200" stroke="#9e9e9e" strokeWidth="3" />
-                    <line x1="150" y1="50" x2="150" y2="100" stroke="#9e9e9e" strokeWidth="3" />
-                    <line x1="250" y1="50" x2="250" y2="100" stroke="#9e9e9e" strokeWidth="3" />
-                    <line x1="100" y1="100" x2="100" y2="150" stroke="#9e9e9e" strokeWidth="3" />
-                    <line x1="200" y1="100" x2="200" y2="150" stroke="#9e9e9e" strokeWidth="3" />
-                    <line x1="300" y1="100" x2="300" y2="150" stroke="#9e9e9e" strokeWidth="3" />
+                    {/* Enhanced mortar lines with depth */}
+                    <line x1="50" y1="100" x2="350" y2="100" stroke="url(#mortarGradient)" strokeWidth="4" />
+                    <line x1="50" y1="150" x2="350" y2="150" stroke="url(#mortarGradient)" strokeWidth="4" />
+                    <line x1="50" y1="200" x2="350" y2="200" stroke="url(#mortarGradient)" strokeWidth="4" />
+                    
+                    {/* Vertical mortar lines - offset brick pattern */}
+                    <line x1="125" y1="50" x2="125" y2="100" stroke="url(#mortarGradient)" strokeWidth="4" />
+                    <line x1="225" y1="50" x2="225" y2="100" stroke="url(#mortarGradient)" strokeWidth="4" />
+                    <line x1="75" y1="100" x2="75" y2="150" stroke="url(#mortarGradient)" strokeWidth="4" />
+                    <line x1="175" y1="100" x2="175" y2="150" stroke="url(#mortarGradient)" strokeWidth="4" />
+                    <line x1="275" y1="100" x2="275" y2="150" stroke="url(#mortarGradient)" strokeWidth="4" />
+                    <line x1="125" y1="150" x2="125" y2="200" stroke="url(#mortarGradient)" strokeWidth="4" />
+                    <line x1="225" y1="150" x2="225" y2="200" stroke="url(#mortarGradient)" strokeWidth="4" />
+                    <line x1="175" y1="200" x2="175" y2="250" stroke="url(#mortarGradient)" strokeWidth="4" />
+
+                    {/* Edge highlights for 3D effect */}
+                    <line x1="50" y1="50" x2="350" y2="50" stroke="#d7ccc8" strokeWidth="2" opacity="0.6" />
+                    <line x1="50" y1="50" x2="50" y2="250" stroke="#d7ccc8" strokeWidth="2" opacity="0.6" />
 
                     {/* Crack with enhanced animation */}
                     <AnimatePresence>
@@ -288,34 +323,42 @@ export default function SelfHealingDashboard() {
                 </div>
 
                 {/* Enhanced sensor readings */}
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-3">
                   <Card
-                    className={`border-2 shadow-lg ${moisture > 30 ? "border-red-500 animate-pulse bg-red-50" : "border-blue-400 bg-blue-50"}`}
+                    className={`border-2 shadow-lg ${moisture > 30 ? "border-red-500 bg-red-50" : "border-blue-400 bg-blue-50"}`}
                   >
-                    <CardContent className="p-4">
-                      <div className="flex items-center gap-3">
+                    <CardContent className="p-3">
+                      <div className="flex items-center gap-2">
                         <motion.div
                           animate={{ scale: moisture > 30 ? [1, 1.2, 1] : 1 }}
                           transition={{ duration: 0.5, repeat: moisture > 30 ? Number.POSITIVE_INFINITY : 0 }}
                         >
-                          <Droplets className={moisture > 30 ? "text-red-500" : "text-blue-500"} size={28} />
+                          <Droplets className={moisture > 30 ? "text-red-500" : "text-blue-500"} size={24} />
                         </motion.div>
                         <div>
                           <div className="text-xs text-gray-600 font-semibold">Moisture Level</div>
-                          <div className="text-3xl font-bold">{moisture}%</div>
-                          {moisture > 30 && <div className="text-xs text-red-600 font-bold">LEAK DETECTED</div>}
+                          <div className="text-2xl font-bold">{moisture}%</div>
+                          {moisture > 30 && (
+                            <motion.div
+                              className="text-xs text-red-600 font-bold"
+                              animate={{ opacity: [1, 0, 1] }}
+                              transition={{ duration: 0.6, repeat: Number.POSITIVE_INFINITY }}
+                            >
+                              LEAK DETECTED
+                            </motion.div>
+                          )}
                         </div>
                       </div>
                     </CardContent>
                   </Card>
 
                   <Card className="border-2 border-gray-400 shadow-lg bg-gray-50">
-                    <CardContent className="p-4">
-                      <div className="flex items-center gap-3">
-                        <Activity className="text-gray-700" size={28} />
+                    <CardContent className="p-3">
+                      <div className="flex items-center gap-2">
+                        <Activity className="text-gray-700" size={24} />
                         <div>
                           <div className="text-xs text-gray-600 font-semibold">Circuit Status</div>
-                          <div className="text-lg font-bold">
+                          <div className="text-base font-bold">
                             {crackDetected && !healed ? "⚠️ Interrupted" : "✓ Connected"}
                           </div>
                         </div>
@@ -325,8 +368,8 @@ export default function SelfHealingDashboard() {
                 </div>
 
                 {/* Enhanced process steps */}
-                <div className="mt-6 space-y-3 bg-gray-50 p-4 rounded-lg">
-                  <div className="text-sm font-bold text-gray-800 mb-3">Healing Process:</div>
+                <div className="mt-4 space-y-2 bg-gray-50 p-3 rounded-lg">
+                  <div className="text-xs font-bold text-gray-800 mb-2">Healing Process:</div>
                   {[
                     { label: "1. Crack Formation", active: crackDetected, icon: "🔴" },
                     { label: "2. Detection Alert", active: crackDetected, icon: "⚠️" },
@@ -335,13 +378,26 @@ export default function SelfHealingDashboard() {
                   ].map((step, i) => (
                     <motion.div
                       key={i}
-                      className={`flex items-center gap-3 text-sm p-2 rounded ${step.active ? "bg-gray-700 text-white font-bold" : "text-gray-400"}`}
-                      animate={{ scale: step.active ? [1, 1.05, 1] : 1 }}
-                      transition={{ duration: 0.5, repeat: step.active ? Number.POSITIVE_INFINITY : 0 }}
+                      className={`flex items-center gap-2 text-xs p-2 rounded relative ${step.active ? "bg-gray-700 text-white font-bold" : "text-gray-400 bg-transparent"}`}
                     >
-                      <div className="text-lg">{step.icon}</div>
-                      <div className={`w-3 h-3 rounded-full ${step.active ? "bg-white" : "bg-gray-300"}`} />
-                      {step.label}
+                      {/* Pulsing red border panel for active state */}
+                      {step.active && (
+                        <motion.div
+                          className="absolute inset-0 border-2 border-red-500 rounded"
+                          animate={{
+                            opacity: [1, 0.3, 1],
+                            borderWidth: ["2px", "3px", "2px"],
+                          }}
+                          transition={{
+                            duration: 0.8,
+                            repeat: Number.POSITIVE_INFINITY,
+                            ease: "easeInOut",
+                          }}
+                        />
+                      )}
+                      <div className="text-base relative z-10">{step.icon}</div>
+                      <div className={`w-2 h-2 rounded-full relative z-10 ${step.active ? "bg-white" : "bg-gray-300"}`} />
+                      <span className="relative z-10">{step.label}</span>
                     </motion.div>
                   ))}
                 </div>
@@ -349,39 +405,44 @@ export default function SelfHealingDashboard() {
             </Card>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}>
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
             <Card className="border-2 border-gray-400 bg-white shadow-2xl">
-              <CardHeader className="bg-gradient-to-r from-gray-100 to-gray-200">
-                <CardTitle className="flex items-center gap-2 text-2xl">
-                  <Zap className="w-6 h-6 text-gray-700" />
+              <CardHeader className="bg-gradient-to-r from-gray-100 to-gray-200 py-4">
+                <CardTitle className="flex items-center gap-2 text-xl">
+                  <Zap className="w-5 h-5 text-gray-700" />
                   Self-Healing Circuit Monitor
                 </CardTitle>
               </CardHeader>
-              <CardContent className="p-8">
-                <div className="relative bg-gradient-to-br from-[#263238] to-[#37474f] rounded-xl p-8 mb-6 min-h-[450px] flex items-center justify-center shadow-inner">
+              <CardContent className="p-6">
+                <div className="relative bg-gradient-to-br from-[#263238] to-[#37474f] rounded-xl p-6 mb-4 min-h-[350px] flex items-center justify-center shadow-inner">
                   <svg viewBox="0 0 400 300" className="w-full max-w-md">
-                    {/* Circuit board with texture */}
+                    {/* Enhanced circuit board with PCB texture */}
                     <defs>
-                      <pattern id="circuitPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                        <circle cx="10" cy="10" r="0.5" fill="#424242" opacity="0.3" />
+                      {/* PCB green texture */}
+                      <pattern id="pcbPattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <rect width="40" height="40" fill="#2d5016" opacity="0.5" />
+                        <circle cx="10" cy="10" r="1" fill="#1b5e20" opacity="0.3" />
+                        <circle cx="30" cy="30" r="1" fill="#1b5e20" opacity="0.3" />
+                        <line x1="0" y1="20" x2="40" y2="20" stroke="#1b5e20" strokeWidth="0.5" opacity="0.2" />
+                        <line x1="20" y1="0" x2="20" y2="40" stroke="#1b5e20" strokeWidth="0.5" opacity="0.2" />
                       </pattern>
-                    </defs>
-                    <rect
-                      x="50"
-                      y="100"
-                      width="300"
-                      height="100"
-                      fill="url(#circuitPattern)"
-                      stroke="#616161"
-                      strokeWidth="3"
-                      rx="8"
-                    />
-                    <rect x="50" y="100" width="300" height="100" fill="#1a1a1a" opacity="0.8" rx="8" />
-
-                    {/* Wire with glow effect */}
-                    <defs>
+                      {/* Copper trace gradient */}
+                      <linearGradient id="copperGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#c77a3e" />
+                        <stop offset="50%" stopColor="#d4924a" />
+                        <stop offset="100%" stopColor="#c77a3e" />
+                      </linearGradient>
+                      {/* Enhanced glow effect */}
                       <filter id="glow">
-                        <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                        <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                        <feMerge>
+                          <feMergeNode in="coloredBlur" />
+                          <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                      </filter>
+                      {/* Stronger glow for active circuits */}
+                      <filter id="strongGlow">
+                        <feGaussianBlur stdDeviation="6" result="coloredBlur" />
                         <feMerge>
                           <feMergeNode in="coloredBlur" />
                           <feMergeNode in="SourceGraphic" />
@@ -389,47 +450,173 @@ export default function SelfHealingDashboard() {
                       </filter>
                     </defs>
 
+                    {/* PCB Board base with shadow */}
+                    <rect
+                      x="54"
+                      y="84"
+                      width="292"
+                      height="132"
+                      fill="#1a1a1a"
+                      opacity="0.4"
+                      rx="10"
+                    />
+                    
+                    {/* Main PCB board */}
+                    <rect
+                      x="50"
+                      y="80"
+                      width="300"
+                      height="140"
+                      fill="#1b5e20"
+                      stroke="#2e7d32"
+                      strokeWidth="3"
+                      rx="10"
+                    />
+                    
+                    {/* PCB texture overlay */}
+                    <rect
+                      x="50"
+                      y="80"
+                      width="300"
+                      height="140"
+                      fill="url(#pcbPattern)"
+                      rx="10"
+                    />
+
+                    {/* Mounting holes */}
+                    {[[70, 100], [330, 100], [70, 200], [330, 200]].map(([cx, cy], i) => (
+                      <g key={i}>
+                        <circle cx={cx} cy={cy} r="6" fill="#333" stroke="#666" strokeWidth="1.5" />
+                        <circle cx={cx} cy={cy} r="3" fill="#1a1a1a" />
+                      </g>
+                    ))}
+
+                    {/* Copper traces - background */}
+                    <rect x="60" y="145" width="280" height="6" fill="url(#copperGradient)" opacity="0.3" rx="3" />
+                    <rect x="60" y="155" width="280" height="4" fill="url(#copperGradient)" opacity="0.2" rx="2" />
+
+                    {/* Left connection pad */}
+                    <g>
+                      <circle cx="90" cy="150" r="12" fill="url(#copperGradient)" stroke="#8d6e63" strokeWidth="2" />
+                      <circle cx="90" cy="150" r="6" fill="#c77a3e" />
+                      <text x="90" y="155" textAnchor="middle" fill="#fff" fontSize="10" fontWeight="bold">-</text>
+                    </g>
+
+                    {/* Right connection pad */}
+                    <g>
+                      <circle cx="310" cy="150" r="12" fill="url(#copperGradient)" stroke="#8d6e63" strokeWidth="2" />
+                      <circle cx="310" cy="150" r="6" fill="#c77a3e" />
+                      <text x="310" y="155" textAnchor="middle" fill="#fff" fontSize="10" fontWeight="bold">+</text>
+                    </g>
+
+                    {/* Enhanced copper wire with metallic look */}
                     {/* Left wire segment */}
                     <motion.line
-                      x1="50"
+                      x1="90"
                       y1="150"
-                      x2="150"
+                      x2="170"
                       y2="150"
-                      stroke={circuitBroken && !circuitHealed ? "#424242" : "#4caf50"}
-                      strokeWidth="8"
+                      stroke={circuitBroken && !circuitHealed ? "#5d4037" : "url(#copperGradient)"}
+                      strokeWidth="10"
                       strokeLinecap="round"
-                      filter={circuitBroken && !circuitHealed ? "" : "url(#glow)"}
+                      filter={circuitBroken && !circuitHealed ? "" : "url(#strongGlow)"}
                       initial={{ pathLength: 0 }}
                       animate={{ pathLength: 1 }}
                       transition={{ duration: 0.5 }}
                     />
+                    
+                    {/* Wire highlight for 3D effect */}
+                    {!circuitBroken && (
+                      <motion.line
+                        x1="90"
+                        y1="147"
+                        x2="170"
+                        y2="147"
+                        stroke="#ffb74d"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        opacity="0.4"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{ duration: 0.5 }}
+                      />
+                    )}
 
-                    {/* Break point with enhanced animation */}
+                    {/* Break point with enhanced animation and sparks */}
                     <AnimatePresence>
                       {circuitBroken && !circuitHealed && (
                         <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                          {/* Broken wire segments */}
                           <motion.line
-                            x1="150"
+                            x1="170"
                             y1="150"
-                            x2="165"
+                            x2="185"
                             y2="150"
-                            stroke="#f44336"
-                            strokeWidth="8"
+                            stroke="#d32f2f"
+                            strokeWidth="10"
                             strokeLinecap="round"
                             animate={{ opacity: [1, 0.3, 1] }}
                             transition={{ duration: 0.5, repeat: Number.POSITIVE_INFINITY }}
                           />
                           <motion.line
-                            x1="185"
+                            x1="215"
                             y1="150"
-                            x2="200"
+                            x2="230"
                             y2="150"
-                            stroke="#f44336"
-                            strokeWidth="8"
+                            stroke="#d32f2f"
+                            strokeWidth="10"
                             strokeLinecap="round"
                             animate={{ opacity: [1, 0.3, 1] }}
                             transition={{ duration: 0.5, repeat: Number.POSITIVE_INFINITY }}
                           />
+
+                          {/* Electric sparks at break points */}
+                          {[...Array(8)].map((_, i) => (
+                            <motion.line
+                              key={`spark-left-${i}`}
+                              x1="185"
+                              y1="150"
+                              x2={185 + Math.cos((i * Math.PI) / 4) * 12}
+                              y2={150 + Math.sin((i * Math.PI) / 4) * 12}
+                              stroke="#ffeb3b"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              initial={{ opacity: 0, pathLength: 0 }}
+                              animate={{
+                                opacity: [0, 1, 0],
+                                pathLength: [0, 1, 0],
+                              }}
+                              transition={{
+                                duration: 0.3,
+                                delay: i * 0.1,
+                                repeat: Number.POSITIVE_INFINITY,
+                                repeatDelay: 1,
+                              }}
+                            />
+                          ))}
+                          {[...Array(8)].map((_, i) => (
+                            <motion.line
+                              key={`spark-right-${i}`}
+                              x1="215"
+                              y1="150"
+                              x2={215 + Math.cos((i * Math.PI) / 4) * 12}
+                              y2={150 + Math.sin((i * Math.PI) / 4) * 12}
+                              stroke="#ffeb3b"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              initial={{ opacity: 0, pathLength: 0 }}
+                              animate={{
+                                opacity: [0, 1, 0],
+                                pathLength: [0, 1, 0],
+                              }}
+                              transition={{
+                                duration: 0.3,
+                                delay: i * 0.1 + 0.15,
+                                repeat: Number.POSITIVE_INFINITY,
+                                repeatDelay: 1,
+                              }}
+                            />
+                          ))}
 
                           {/* Gap with spark effect */}
                           <rect x="165" y="142" width="20" height="16" fill="#1a1a1a" />
@@ -481,51 +668,98 @@ export default function SelfHealingDashboard() {
                       )}
                     </AnimatePresence>
 
-                    {/* Right wire segment */}
+                    {/* Right wire segment with highlight */}
                     <motion.line
-                      x1="200"
+                      x1="230"
                       y1="150"
-                      x2="350"
+                      x2="310"
                       y2="150"
-                      stroke={circuitBroken && !circuitHealed ? "#424242" : "#4caf50"}
-                      strokeWidth="8"
+                      stroke={circuitBroken && !circuitHealed ? "#5d4037" : "url(#copperGradient)"}
+                      strokeWidth="10"
                       strokeLinecap="round"
-                      filter={circuitBroken && !circuitHealed ? "" : "url(#glow)"}
+                      filter={circuitBroken && !circuitHealed ? "" : "url(#strongGlow)"}
                       initial={{ pathLength: 0 }}
                       animate={{ pathLength: 1 }}
                       transition={{ duration: 0.5, delay: 0.2 }}
                     />
+                    
+                    {/* Wire highlight for 3D effect */}
+                    {!circuitBroken && (
+                      <motion.line
+                        x1="230"
+                        y1="147"
+                        x2="310"
+                        y2="147"
+                        stroke="#ffb74d"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        opacity="0.4"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                      />
+                    )}
 
-                    {/* Graphite capsules with burst animation */}
-                    {[160, 175, 190].map((x, i) => (
+                    {/* Enhanced graphite capsules with realistic design */}
+                    {[190, 200, 210].map((x, i) => (
                       <motion.g key={i}>
-                        <motion.circle
+                        {/* Capsule body */}
+                        <motion.ellipse
                           cx={x}
                           cy="150"
-                          r="6"
-                          fill="#757575"
+                          rx="8"
+                          ry="10"
+                          fill="#616161"
                           stroke="#424242"
                           strokeWidth="2"
                           initial={{ scale: 1 }}
                           animate={{
-                            scale: circuitBroken && circuitHealing ? [1, 1.8, 0] : 1,
+                            scale: circuitBroken && circuitHealing ? [1, 1.4, 0] : 1,
                             opacity: circuitBroken && circuitHealing ? [1, 0.5, 0] : 1,
                           }}
-                          transition={{ duration: 0.5, delay: i * 0.1 }}
+                          transition={{ duration: 0.5, delay: i * 0.15 }}
                         />
-                        {/* Burst effect */}
+                        {/* Capsule shine */}
+                        <motion.ellipse
+                          cx={x - 2}
+                          cy="147"
+                          rx="3"
+                          ry="4"
+                          fill="#9e9e9e"
+                          opacity="0.6"
+                          initial={{ scale: 1 }}
+                          animate={{
+                            scale: circuitBroken && circuitHealing ? [1, 1.4, 0] : 1,
+                            opacity: circuitBroken && circuitHealing ? [0.6, 0.3, 0] : 0.6,
+                          }}
+                          transition={{ duration: 0.5, delay: i * 0.15 }}
+                        />
+                        {/* Burst rings effect */}
                         {circuitBroken && circuitHealing && (
-                          <motion.circle
-                            cx={x}
-                            cy="150"
-                            r="12"
-                            fill="none"
-                            stroke="#9e9e9e"
-                            strokeWidth="2"
-                            initial={{ scale: 0, opacity: 1 }}
-                            animate={{ scale: 2, opacity: 0 }}
-                            transition={{ duration: 0.5, delay: i * 0.1 }}
-                          />
+                          <>
+                            <motion.circle
+                              cx={x}
+                              cy="150"
+                              r="15"
+                              fill="none"
+                              stroke="#9e9e9e"
+                              strokeWidth="3"
+                              initial={{ scale: 0, opacity: 1 }}
+                              animate={{ scale: 2.5, opacity: 0 }}
+                              transition={{ duration: 0.8, delay: i * 0.15 }}
+                            />
+                            <motion.circle
+                              cx={x}
+                              cy="150"
+                              r="15"
+                              fill="none"
+                              stroke="#757575"
+                              strokeWidth="2"
+                              initial={{ scale: 0, opacity: 0.8 }}
+                              animate={{ scale: 3, opacity: 0 }}
+                              transition={{ duration: 1, delay: i * 0.15 + 0.1 }}
+                            />
+                          </>
                         )}
                       </motion.g>
                     ))}
@@ -586,24 +820,29 @@ export default function SelfHealingDashboard() {
                   </svg>
 
                   {/* Enhanced status indicator */}
-                  <div className="absolute top-4 right-4">
+                  <div className="absolute top-3 right-3">
                     <AnimatePresence>
                       {circuitBroken && !circuitHealed && (
                         <motion.div
                           initial={{ scale: 0, rotate: -180 }}
                           animate={{ scale: 1, rotate: 0 }}
                           exit={{ scale: 0, rotate: 180 }}
-                          className={`flex items-center gap-2 px-5 py-3 rounded-full ${circuitHealing ? "bg-green-500" : "bg-red-500"} text-white font-bold shadow-2xl`}
+                          className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm ${circuitHealing ? "bg-green-500" : "bg-red-500"} text-white font-bold shadow-2xl`}
                         >
                           {circuitHealing ? (
                             <>
-                              <Activity className="w-6 h-6 animate-spin" />
-                              Repairing Circuit...
+                              <Activity className="w-4 h-4 animate-spin" />
+                              Repairing...
                             </>
                           ) : (
                             <>
-                              <AlertTriangle className="w-6 h-6 animate-bounce" />
-                              Circuit Broken!
+                              <AlertTriangle className="w-4 h-4 animate-bounce" />
+                              <motion.span
+                                animate={{ opacity: [1, 0, 1] }}
+                                transition={{ duration: 0.6, repeat: Number.POSITIVE_INFINITY }}
+                              >
+                                Circuit Broken!
+                              </motion.span>
                             </>
                           )}
                         </motion.div>
@@ -613,10 +852,10 @@ export default function SelfHealingDashboard() {
                           initial={{ scale: 0 }}
                           animate={{ scale: [0, 1.2, 1] }}
                           exit={{ scale: 0 }}
-                          className="flex items-center gap-2 px-5 py-3 rounded-full bg-gray-700 text-white font-bold shadow-2xl"
+                          className="flex items-center gap-2 px-4 py-2 rounded-full text-sm bg-gray-700 text-white font-bold shadow-2xl"
                         >
-                          <CheckCircle className="w-6 h-6" />
-                          Fully Restored!
+                          <CheckCircle className="w-4 h-4" />
+                          Restored!
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -624,10 +863,10 @@ export default function SelfHealingDashboard() {
                 </div>
 
                 {/* Enhanced status cards */}
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-3">
                   <Card className="border-2 border-gray-400 shadow-lg bg-gray-50">
-                    <CardContent className="p-4">
-                      <div className="flex items-center gap-3">
+                    <CardContent className="p-3">
+                      <div className="flex items-center gap-2">
                         <motion.div
                           animate={{
                             scale: circuitBroken && !circuitHealed ? [1, 1.2, 1] : 1,
@@ -640,12 +879,12 @@ export default function SelfHealingDashboard() {
                         >
                           <Zap
                             className={circuitBroken && !circuitHealed ? "text-red-500" : "text-green-500"}
-                            size={28}
+                            size={24}
                           />
                         </motion.div>
                         <div>
                           <div className="text-xs text-gray-600 font-semibold">Conductivity</div>
-                          <div className="text-lg font-bold">
+                          <div className="text-base font-bold">
                             {circuitBroken && !circuitHealed ? "⚠️ Interrupted" : "✓ Active"}
                           </div>
                         </div>
@@ -654,20 +893,24 @@ export default function SelfHealingDashboard() {
                   </Card>
 
                   <Card className="border-2 border-gray-400 shadow-lg bg-gray-50">
-                    <CardContent className="p-4">
-                      <div className="flex items-center gap-3">
-                        <Activity className="text-gray-700" size={28} />
+                    <CardContent className="p-3">
+                      <div className="flex items-center gap-2">
+                        <Activity className="text-gray-700" size={24} />
                         <div>
                           <div className="text-xs text-gray-600 font-semibold">LED Status</div>
-                          <div className="text-lg font-bold flex items-center gap-2">
+                          <div className="text-base font-bold flex items-center gap-2">
                             {circuitBroken && !circuitHealed ? (
                               <>
-                                <span className="w-3 h-3 bg-red-500 rounded-full animate-pulse" />
+                                <motion.span
+                                  className="w-2.5 h-2.5 bg-red-500 rounded-full"
+                                  animate={{ opacity: [1, 0, 1] }}
+                                  transition={{ duration: 0.6, repeat: Number.POSITIVE_INFINITY }}
+                                />
                                 OFF
                               </>
                             ) : (
                               <>
-                                <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
+                                <span className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse" />
                                 ON
                               </>
                             )}
@@ -679,8 +922,8 @@ export default function SelfHealingDashboard() {
                 </div>
 
                 {/* Enhanced process steps */}
-                <div className="mt-6 space-y-3 bg-gray-50 p-4 rounded-lg">
-                  <div className="text-sm font-bold text-gray-800 mb-3">Repair Process:</div>
+                <div className="mt-4 space-y-2 bg-gray-50 p-3 rounded-lg">
+                  <div className="text-xs font-bold text-gray-800 mb-2">Repair Process:</div>
                   {[
                     { label: "1. Wire Break", active: circuitBroken, icon: "⚡" },
                     { label: "2. Capsule Burst", active: circuitBroken, icon: "💥" },
@@ -689,13 +932,26 @@ export default function SelfHealingDashboard() {
                   ].map((step, i) => (
                     <motion.div
                       key={i}
-                      className={`flex items-center gap-3 text-sm p-2 rounded ${step.active ? "bg-gray-700 text-white font-bold" : "text-gray-400"}`}
-                      animate={{ scale: step.active ? [1, 1.05, 1] : 1 }}
-                      transition={{ duration: 0.5, repeat: step.active ? Number.POSITIVE_INFINITY : 0 }}
+                      className={`flex items-center gap-2 text-xs p-2 rounded relative ${step.active ? "bg-gray-700 text-white font-bold" : "text-gray-400 bg-transparent"}`}
                     >
-                      <div className="text-lg">{step.icon}</div>
-                      <div className={`w-3 h-3 rounded-full ${step.active ? "bg-white" : "bg-gray-300"}`} />
-                      {step.label}
+                      {/* Pulsing red border panel for active state */}
+                      {step.active && (
+                        <motion.div
+                          className="absolute inset-0 border-2 border-red-500 rounded"
+                          animate={{
+                            opacity: [1, 0.3, 1],
+                            borderWidth: ["2px", "3px", "2px"],
+                          }}
+                          transition={{
+                            duration: 0.8,
+                            repeat: Number.POSITIVE_INFINITY,
+                            ease: "easeInOut",
+                          }}
+                        />
+                      )}
+                      <div className="text-base relative z-10">{step.icon}</div>
+                      <div className={`w-2 h-2 rounded-full relative z-10 ${step.active ? "bg-white" : "bg-gray-300"}`} />
+                      <span className="relative z-10">{step.label}</span>
                     </motion.div>
                   ))}
                 </div>

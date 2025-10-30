@@ -6,30 +6,138 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
-import { Shield, Zap, TrendingUp, ArrowLeft, AlertCircle, CheckCircle, Activity } from "lucide-react"
+import { Shield, Zap, TrendingUp, ArrowLeft, AlertCircle, CheckCircle, Activity, ShoppingCart } from "lucide-react"
 import Link from "next/link"
+import { useState } from "react"
+import { ScrollProgress } from "@/components/scroll-progress"
+import { BackToTop } from "@/components/back-to-top"
 
 export default function SelfHealingSystemsPage() {
+  const [showOrderPopup, setShowOrderPopup] = useState(false)
+
+  const handlePurchase = () => {
+    setShowOrderPopup(true)
+    setTimeout(() => setShowOrderPopup(false), 3000)
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+      <ScrollProgress />
       <Navigation />
+
+      {/* Order Confirmation Popup */}
+      {showOrderPopup && (
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -50 }}
+          className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 bg-gray-700 text-white px-8 py-4 rounded-lg shadow-2xl flex items-center gap-3"
+        >
+          <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+            <ShoppingCart className="w-5 h-5" />
+          </div>
+          <div>
+            <p className="font-semibold text-lg">Order Placed Successfully!</p>
+            <p className="text-sm text-white/90">Your materials are on the way</p>
+          </div>
+        </motion.div>
+      )}
+
 
       {/* Hero Section */}
       <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden mt-20">
         <motion.div className="absolute inset-0 bg-gradient-to-br from-[#616161] via-[#424242] to-[#616161]" />
 
-        {/* Animated Circuit Pattern */}
+        {/* Animated Circuit Pattern - Enhanced */}
         <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 1000 1000">
           <motion.path
-            d="M 0 500 L 200 500 L 200 300 L 400 300 L 400 700 L 600 700 L 600 500 L 800 500 L 800 300 L 1000 300"
-            stroke="#9e9e9e"
-            strokeWidth="3"
+            d="M100,100 L200,100 L200,200 L300,200 L300,100 L400,100"
+            stroke="white"
+            strokeWidth="2"
             fill="none"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 0.6 }}
+            transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, repeatDelay: 1 }}
           />
+          <motion.path
+            d="M600,100 L700,100 L700,200 L800,200 L800,300 L900,300"
+            stroke="white"
+            strokeWidth="2"
+            fill="none"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 0.6 }}
+            transition={{ duration: 2, delay: 0.5, repeat: Number.POSITIVE_INFINITY, repeatDelay: 1 }}
+          />
+          <motion.path
+            d="M100,500 L300,500 L300,600 L500,600"
+            stroke="white"
+            strokeWidth="2"
+            fill="none"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 0.6 }}
+            transition={{ duration: 2, delay: 1, repeat: Number.POSITIVE_INFINITY, repeatDelay: 1 }}
+          />
+          <motion.path
+            d="M500,800 L600,800 L600,700 L700,700 L700,600"
+            stroke="white"
+            strokeWidth="2"
+            fill="none"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 0.6 }}
+            transition={{ duration: 2, delay: 1.5, repeat: Number.POSITIVE_INFINITY, repeatDelay: 1 }}
+          />
+          {/* Circuit nodes */}
+          {[
+            [200, 100], [300, 200], [700, 100], [800, 200], [300, 500], [500, 600], [600, 800], [700, 700]
+          ].map(([cx, cy], i) => (
+            <motion.circle
+              key={i}
+              cx={cx}
+              cy={cy}
+              r="4"
+              fill="white"
+              initial={{ scale: 0 }}
+              animate={{ scale: [0, 1.5, 1], opacity: [0, 1, 0.8] }}
+              transition={{
+                duration: 0.5,
+                delay: i * 0.3,
+                repeat: Number.POSITIVE_INFINITY,
+                repeatDelay: 2,
+              }}
+            />
+          ))}
         </svg>
+
+        {/* Floating Tech Elements */}
+        <div className="absolute inset-0 opacity-20">
+          {[...Array(10)].map((_, i) => (
+            <motion.div
+              key={`tech-${i}`}
+              className="absolute"
+              style={{
+                left: `${10 + Math.random() * 80}%`,
+                top: `${10 + Math.random() * 80}%`,
+              }}
+              animate={{
+                y: [0, -40, 0],
+                rotate: [0, 180, 360],
+                opacity: [0.3, 0.8, 0.3],
+              }}
+              transition={{
+                duration: 8 + Math.random() * 4,
+                repeat: Number.POSITIVE_INFINITY,
+                delay: Math.random() * 3,
+                ease: "easeInOut",
+              }}
+            >
+              <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center backdrop-blur-sm border border-white/30">
+                {i % 3 === 0 && <Shield className="w-6 h-6 text-white" />}
+                {i % 3 === 1 && <Zap className="w-6 h-6 text-white" />}
+                {i % 3 === 2 && <Activity className="w-6 h-6 text-white" />}
+              </div>
+            </motion.div>
+          ))}
+        </div>
 
         <div className="relative z-10 container mx-auto px-4 text-center">
           <motion.h1
@@ -83,8 +191,7 @@ export default function SelfHealingSystemsPage() {
           {/* Self-Healing Concrete */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
             <Card className="h-full border-2 border-gray-300 hover:border-gray-500 transition-all duration-300 hover:shadow-2xl">
@@ -131,9 +238,8 @@ export default function SelfHealingSystemsPage() {
           {/* Self-Healing Circuit */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
             <Card className="h-full border-2 border-gray-300 hover:border-gray-500 transition-all duration-300 hover:shadow-2xl">
               <CardHeader>
@@ -210,20 +316,23 @@ export default function SelfHealingSystemsPage() {
                       <TableHead className="font-semibold text-gray-900">Material</TableHead>
                       <TableHead className="font-semibold text-gray-900">Quantity</TableHead>
                       <TableHead className="font-semibold text-gray-900">Purpose</TableHead>
+                      <TableHead className="font-semibold text-gray-900 text-right">Cost (AED)</TableHead>
+                      <TableHead className="font-semibold text-gray-900 text-center">Purchase</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {[
-                      { item: "Cement", quantity: "1 cup (~250 g)", purpose: "Binder" },
-                      { item: "Sand", quantity: "2 cups (~500 g)", purpose: "Filler" },
-                      { item: "Baking Soda", quantity: "2-3 tsp (~10-15 g)", purpose: "Healing agent" },
-                      { item: "Water", quantity: "½ cup (~120-140 mL)", purpose: "Mixing" },
-                      { item: "CaCl₂ Solution", quantity: "10-15 g / 100 mL water", purpose: "Healing trigger" },
-                      { item: "Copper Foil Tape", quantity: "5-10 mm strips", purpose: "Crack sensor" },
+                      { item: "Cement", quantity: "1 cup (~250 g)", purpose: "Binder", cost: "5" },
+                      { item: "Sand", quantity: "2 cups (~500 g)", purpose: "Filler", cost: "2" },
+                      { item: "Baking Soda", quantity: "2-3 tsp (~10-15 g)", purpose: "Healing agent", cost: "3" },
+                      { item: "Water", quantity: "½ cup (~120-140 mL)", purpose: "Mixing", cost: "1" },
+                      { item: "CaCl₂ Solution", quantity: "10-15 g / 100 mL water", purpose: "Healing trigger", cost: "8" },
+                      { item: "Copper Foil Tape", quantity: "5-10 mm strips", purpose: "Crack sensor", cost: "4" },
                       {
                         item: "Graphite Gel Wire",
                         quantity: "1 tsp gelatin + 1 tsp salt + ½ tsp graphite",
                         purpose: "Self-healing circuit",
+                        cost: "6",
                       },
                     ].map((row, i) => (
                       <motion.tr
@@ -237,8 +346,34 @@ export default function SelfHealingSystemsPage() {
                         <TableCell className="font-medium text-gray-900">{row.item}</TableCell>
                         <TableCell className="text-gray-700">{row.quantity}</TableCell>
                         <TableCell className="text-gray-700">{row.purpose}</TableCell>
+                        <TableCell className="text-gray-900 text-right font-semibold">AED {row.cost}</TableCell>
+                        <TableCell className="text-center">
+                          <Button
+                            size="sm"
+                            onClick={handlePurchase}
+                            className="bg-gray-700 hover:bg-gray-800 text-white"
+                          >
+                            <ShoppingCart className="w-4 h-4 mr-1" />
+                            Buy
+                          </Button>
+                        </TableCell>
                       </motion.tr>
                     ))}
+                    <TableRow className="border-t-2 border-gray-400 bg-gray-100">
+                      <TableCell colSpan={3} className="font-bold text-gray-900">
+                        Total Estimated Cost
+                      </TableCell>
+                      <TableCell className="text-right font-bold text-gray-700 text-lg">AED 29</TableCell>
+                      <TableCell className="text-center">
+                        <Button
+                          onClick={handlePurchase}
+                          className="bg-gray-700 hover:bg-gray-800 text-white font-bold"
+                        >
+                          <ShoppingCart className="w-4 h-4 mr-2" />
+                          Buy All
+                        </Button>
+                      </TableCell>
+                    </TableRow>
                   </TableBody>
                 </Table>
               </CardContent>
@@ -486,7 +621,8 @@ export default function SelfHealingSystemsPage() {
         </div>
       </section>
 
-      <Footer />
+      <Footer theme="gray" />
+      <BackToTop />
     </div>
   )
 }

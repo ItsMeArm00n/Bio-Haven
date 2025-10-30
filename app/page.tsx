@@ -7,6 +7,8 @@ import { ArrowRight, Leaf, Zap, Droplets, Sun, Hammer, Shield, Sparkles, Setting
 import Link from "next/link"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
+import { ScrollProgress } from "@/components/scroll-progress"
+import { BackToTop } from "@/components/back-to-top"
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -25,6 +27,7 @@ const staggerContainer = {
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50">
+      <ScrollProgress />
       <Navigation />
 
       {/* Hero Section */}
@@ -35,17 +38,56 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.1),transparent_50%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(255,255,255,0.05),transparent_50%)]" />
 
-          {/* Geometric Shapes */}
+          {/* Geometric Shapes - Enhanced */}
           <motion.div
             className="absolute top-20 left-10 w-32 h-32 border border-white/20 rounded-full"
-            animate={{ rotate: 360 }}
+            animate={{ rotate: 360, scale: [1, 1.1, 1] }}
             transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
           />
           <motion.div
             className="absolute bottom-32 right-16 w-24 h-24 bg-white/10 rounded-lg rotate-45"
-            animate={{ rotate: [45, 135, 45] }}
+            animate={{ rotate: [45, 135, 45], scale: [1, 1.2, 1] }}
             transition={{ duration: 15, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
           />
+          <motion.div
+            className="absolute top-1/2 left-1/4 w-16 h-16 border-2 border-white/30 rounded-full"
+            animate={{ y: [0, -20, 0], opacity: [0.3, 0.6, 0.3] }}
+            transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="absolute top-1/3 right-1/4 w-20 h-20 border border-white/20"
+            animate={{ rotate: [0, 90, 180, 270, 360], scale: [1, 1.15, 1] }}
+            transition={{ duration: 25, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+          />
+          <motion.div
+            className="absolute bottom-1/4 left-1/3 w-12 h-12 bg-white/5 rounded-full"
+            animate={{ x: [0, 30, 0], y: [0, -30, 0] }}
+            transition={{ duration: 12, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+          />
+          
+          {/* Floating Particles */}
+          {[...Array(12)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-white/30 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -100, 0],
+                opacity: [0, 1, 0],
+                scale: [0, 1.5, 0],
+              }}
+              transition={{
+                duration: 5 + Math.random() * 5,
+                repeat: Number.POSITIVE_INFINITY,
+                delay: Math.random() * 5,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+          
           <motion.div
             className="absolute top-1/2 left-1/4 w-16 h-16 border-2 border-white/30 rounded-full"
             animate={{ scale: [1, 1.2, 1] }}
@@ -53,9 +95,9 @@ export default function HomePage() {
           />
         </div>
 
-        {/* Floating Elements */}
+        {/* Floating Elements - Enhanced */}
         <div className="absolute inset-0 z-10">
-          {[...Array(8)].map((_, i) => (
+          {[...Array(10)].map((_, i) => (
             <motion.div
               key={i}
               className="absolute"
@@ -64,9 +106,11 @@ export default function HomePage() {
                 top: `${20 + Math.random() * 60}%`,
               }}
               animate={{
-                y: [0, -30, 0],
+                y: [0, -40, 0],
+                x: [0, Math.sin(i) * 20, 0],
                 rotate: [0, 180, 360],
-                opacity: [0.3, 0.7, 0.3],
+                opacity: [0.2, 0.8, 0.2],
+                scale: [1, 1.3, 1],
               }}
               transition={{
                 duration: 6 + Math.random() * 4,
@@ -75,11 +119,11 @@ export default function HomePage() {
                 ease: "easeInOut",
               }}
             >
-              <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
-                {i % 4 === 0 && <Leaf className="w-4 h-4 text-white" />}
-                {i % 4 === 1 && <Zap className="w-4 h-4 text-white" />}
-                {i % 4 === 2 && <Droplets className="w-4 h-4 text-white" />}
-                {i % 4 === 3 && <Sun className="w-4 h-4 text-white" />}
+              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm shadow-lg border border-white/30">
+                {i % 4 === 0 && <Leaf className="w-5 h-5 text-white" />}
+                {i % 4 === 1 && <Zap className="w-5 h-5 text-white" />}
+                {i % 4 === 2 && <Droplets className="w-5 h-5 text-white" />}
+                {i % 4 === 3 && <Sun className="w-5 h-5 text-white" />}
               </div>
             </motion.div>
           ))}
@@ -128,8 +172,7 @@ export default function HomePage() {
               </Button>
               <Button
                 size="lg"
-                variant="outline"
-                className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm font-semibold text-lg px-8 py-4"
+                className="bg-yellow-400 text-emerald-900 hover:bg-yellow-300 font-semibold text-lg px-8 py-4 shadow-2xl hover:shadow-yellow-400/25 transition-all duration-300"
                 onClick={() => document.getElementById("vision")?.scrollIntoView({ behavior: "smooth" })}
               >
                 Our Vision
@@ -389,6 +432,7 @@ export default function HomePage() {
       </section>
 
       <Footer />
+      <BackToTop />
     </div>
   )
 }
