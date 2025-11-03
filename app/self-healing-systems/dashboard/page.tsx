@@ -18,46 +18,59 @@ export default function SelfHealingDashboard() {
   const [circuitHealing, setCircuitHealing] = useState(false)
   const [circuitHealed, setCircuitHealed] = useState(false)
 
+  // Manual trigger functions
+  const triggerCrack = () => {
+    if (!crackDetected && !healing && !healed) {
+      setCrackDetected(true)
+      setMoisture(45)
+      setTimeout(() => {
+        setHealing(true)
+        setTimeout(() => {
+          setHealing(false)
+          setHealed(true)
+          setMoisture(15)
+          setTimeout(() => {
+            setCrackDetected(false)
+            setHealed(false)
+          }, 2000)
+        }, 3000)
+      }, 2000)
+    }
+  }
+
   useEffect(() => {
     const crackCycle = setInterval(() => {
       if (!crackDetected && !healing && !healed) {
-        setCrackDetected(true)
-        setMoisture(45)
-        setTimeout(() => {
-          setHealing(true)
-          setTimeout(() => {
-            setHealing(false)
-            setHealed(true)
-            setMoisture(15)
-            setTimeout(() => {
-              setCrackDetected(false)
-              setHealed(false)
-            }, 3000)
-          }, 5000)
-        }, 3000)
+        triggerCrack()
       }
-    }, 15000)
+    }, 10000) // Reduced from 15000 to 10000
 
     return () => clearInterval(crackCycle)
   }, [crackDetected, healing, healed])
 
+  const triggerCircuit = () => {
+    if (!circuitBroken && !circuitHealing && !circuitHealed) {
+      setCircuitBroken(true)
+      setTimeout(() => {
+        setCircuitHealing(true)
+        setTimeout(() => {
+          setCircuitHealing(false)
+          setCircuitHealed(true)
+          setTimeout(() => {
+            setCircuitBroken(false)
+            setCircuitHealed(false)
+          }, 2000)
+        }, 3000)
+      }, 1500)
+    }
+  }
+
   useEffect(() => {
     const circuitCycle = setInterval(() => {
       if (!circuitBroken && !circuitHealing && !circuitHealed) {
-        setCircuitBroken(true)
-        setTimeout(() => {
-          setCircuitHealing(true)
-          setTimeout(() => {
-            setCircuitHealing(false)
-            setCircuitHealed(true)
-            setTimeout(() => {
-              setCircuitBroken(false)
-              setCircuitHealed(false)
-            }, 3000)
-          }, 4000)
-        }, 2000)
+        triggerCircuit()
       }
-    }, 18000)
+    }, 12000) // Reduced from 18000 to 12000
 
     return () => clearInterval(circuitCycle)
   }, [circuitBroken, circuitHealing, circuitHealed])
@@ -88,6 +101,18 @@ export default function SelfHealingDashboard() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6">
+                {/* Manual Control Button */}
+                <div className="mb-4 flex justify-center">
+                  <Button
+                    onClick={triggerCrack}
+                    disabled={crackDetected || healing || healed}
+                    className="bg-red-600 hover:bg-red-700 text-white font-bold shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                    size="lg"
+                  >
+                    <AlertTriangle className="w-5 h-5 mr-2" />
+                    Trigger Concrete Crack
+                  </Button>
+                </div>
                 <div className="relative bg-gradient-to-br from-[#78909c] to-[#546e7a] rounded-xl p-6 mb-4 min-h-[350px] flex items-center justify-center shadow-inner">
                   <svg viewBox="0 0 400 300" className="w-full max-w-md">
                     <defs>
@@ -414,6 +439,18 @@ export default function SelfHealingDashboard() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6">
+                {/* Manual Control Button */}
+                <div className="mb-4 flex justify-center">
+                  <Button
+                    onClick={triggerCircuit}
+                    disabled={circuitBroken || circuitHealing || circuitHealed}
+                    className="bg-orange-600 hover:bg-orange-700 text-white font-bold shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                    size="lg"
+                  >
+                    <Zap className="w-5 h-5 mr-2" />
+                    Break Circuit
+                  </Button>
+                </div>
                 <div className="relative bg-gradient-to-br from-[#263238] to-[#37474f] rounded-xl p-6 mb-4 min-h-[350px] flex items-center justify-center shadow-inner">
                   <svg viewBox="0 0 400 300" className="w-full max-w-md">
                     {/* Enhanced circuit board with PCB texture */}
@@ -960,11 +997,612 @@ export default function SelfHealingDashboard() {
           </motion.div>
         </div>
 
+        {/* Brick Cross-Section Views */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7 }}
+          className="mt-8"
+        >
+          <h3 className="font-display text-2xl font-bold text-gray-900 mb-6 text-center">Brick Healing Perspectives</h3>
+          
+          <div className="space-y-6">
+            {/* Inside View - Pipe System */}
+            <Card className="border-2 border-gray-400">
+              <CardHeader className="bg-gradient-to-r from-gray-700 to-gray-600 text-white py-4">
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+                    <Activity className="w-4 h-4" />
+                  </div>
+                  Inside View: Pipe Delivery System
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                <div className="relative bg-gradient-to-br from-[#78909c] to-[#546e7a] rounded-xl p-6 mb-4 min-h-[300px] flex items-center justify-center shadow-inner">
+                  <svg className="absolute inset-0 w-full h-full" viewBox="0 0 800 300" preserveAspectRatio="xMidYMid meet">
+                    <defs>
+                      <pattern id="brickTextureInside" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <circle cx="10" cy="10" r="1" fill="#8d6e63" opacity="0.3" />
+                        <circle cx="5" cy="15" r="0.8" fill="#6d4c41" opacity="0.25" />
+                        <circle cx="16" cy="7" r="0.6" fill="#5d4037" opacity="0.2" />
+                      </pattern>
+                      <linearGradient id="brickGradInside" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#bf8e7a" />
+                        <stop offset="30%" stopColor="#a1887f" />
+                        <stop offset="60%" stopColor="#8d6e63" />
+                        <stop offset="100%" stopColor="#6d4c41" />
+                      </linearGradient>
+                      <linearGradient id="mortarGradInside" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#9e9e9e" />
+                        <stop offset="50%" stopColor="#bdbdbd" />
+                        <stop offset="100%" stopColor="#9e9e9e" />
+                      </linearGradient>
+                      <linearGradient id="pipeGradInside" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#90a4ae" />
+                        <stop offset="50%" stopColor="#607d8b" />
+                        <stop offset="100%" stopColor="#455a64" />
+                      </linearGradient>
+                    </defs>
+                    
+                    {/* Brick wall with proper pattern - Row 1 */}
+                    <rect x="50" y="40" width="160" height="50" fill="url(#brickGradInside)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="50" y="40" width="160" height="50" fill="url(#brickTextureInside)" />
+                    
+                    <rect x="220" y="40" width="160" height="50" fill="url(#brickGradInside)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="220" y="40" width="160" height="50" fill="url(#brickTextureInside)" />
+                    
+                    <rect x="390" y="40" width="160" height="50" fill="url(#brickGradInside)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="390" y="40" width="160" height="50" fill="url(#brickTextureInside)" />
+                    
+                    <rect x="560" y="40" width="160" height="50" fill="url(#brickGradInside)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="560" y="40" width="160" height="50" fill="url(#brickTextureInside)" />
+                    
+                    {/* Mortar lines - horizontal */}
+                    <rect x="50" y="90" width="670" height="6" fill="url(#mortarGradInside)" />
+                    
+                    {/* Brick wall - Row 2 (offset pattern) */}
+                    <rect x="50" y="96" width="80" height="50" fill="url(#brickGradInside)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="50" y="96" width="80" height="50" fill="url(#brickTextureInside)" />
+                    
+                    <rect x="140" y="96" width="160" height="50" fill="url(#brickGradInside)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="140" y="96" width="160" height="50" fill="url(#brickTextureInside)" />
+                    
+                    <rect x="310" y="96" width="160" height="50" fill="url(#brickGradInside)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="310" y="96" width="160" height="50" fill="url(#brickTextureInside)" />
+                    
+                    <rect x="480" y="96" width="160" height="50" fill="url(#brickGradInside)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="480" y="96" width="160" height="50" fill="url(#brickTextureInside)" />
+                    
+                    <rect x="650" y="96" width="70" height="50" fill="url(#brickGradInside)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="650" y="96" width="70" height="50" fill="url(#brickTextureInside)" />
+                    
+                    {/* Mortar line */}
+                    <rect x="50" y="146" width="670" height="6" fill="url(#mortarGradInside)" />
+                    
+                    {/* Brick wall - Row 3 */}
+                    <rect x="50" y="152" width="160" height="50" fill="url(#brickGradInside)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="50" y="152" width="160" height="50" fill="url(#brickTextureInside)" />
+                    
+                    <rect x="220" y="152" width="160" height="50" fill="url(#brickGradInside)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="220" y="152" width="160" height="50" fill="url(#brickTextureInside)" />
+                    
+                    <rect x="390" y="152" width="160" height="50" fill="url(#brickGradInside)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="390" y="152" width="160" height="50" fill="url(#brickTextureInside)" />
+                    
+                    <rect x="560" y="152" width="160" height="50" fill="url(#brickGradInside)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="560" y="152" width="160" height="50" fill="url(#brickTextureInside)" />
+                    
+                    {/* Mortar line */}
+                    <rect x="50" y="202" width="670" height="6" fill="url(#mortarGradInside)" />
+                    
+                    {/* Brick wall - Row 4 (offset) */}
+                    <rect x="50" y="208" width="80" height="50" fill="url(#brickGradInside)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="50" y="208" width="80" height="50" fill="url(#brickTextureInside)" />
+                    
+                    <rect x="140" y="208" width="160" height="50" fill="url(#brickGradInside)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="140" y="208" width="160" height="50" fill="url(#brickTextureInside)" />
+                    
+                    <rect x="310" y="208" width="160" height="50" fill="url(#brickGradInside)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="310" y="208" width="160" height="50" fill="url(#brickTextureInside)" />
+                    
+                    <rect x="480" y="208" width="160" height="50" fill="url(#brickGradInside)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="480" y="208" width="160" height="50" fill="url(#brickTextureInside)" />
+                    
+                    <rect x="650" y="208" width="70" height="50" fill="url(#brickGradInside)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="650" y="208" width="70" height="50" fill="url(#brickTextureInside)" />
+                    
+                    {/* Vertical mortar lines - Row 1 */}
+                    <rect x="210" y="40" width="6" height="50" fill="url(#mortarGradInside)" />
+                    <rect x="380" y="40" width="6" height="50" fill="url(#mortarGradInside)" />
+                    <rect x="550" y="40" width="6" height="50" fill="url(#mortarGradInside)" />
+                    
+                    {/* Vertical mortar lines - Row 2 */}
+                    <rect x="130" y="96" width="6" height="50" fill="url(#mortarGradInside)" />
+                    <rect x="300" y="96" width="6" height="50" fill="url(#mortarGradInside)" />
+                    <rect x="470" y="96" width="6" height="50" fill="url(#mortarGradInside)" />
+                    <rect x="640" y="96" width="6" height="50" fill="url(#mortarGradInside)" />
+                    
+                    {/* Vertical mortar lines - Row 3 */}
+                    <rect x="210" y="152" width="6" height="50" fill="url(#mortarGradInside)" />
+                    <rect x="380" y="152" width="6" height="50" fill="url(#mortarGradInside)" />
+                    <rect x="550" y="152" width="6" height="50" fill="url(#mortarGradInside)" />
+                    
+                    {/* Vertical mortar lines - Row 4 */}
+                    <rect x="130" y="208" width="6" height="50" fill="url(#mortarGradInside)" />
+                    <rect x="300" y="208" width="6" height="50" fill="url(#mortarGradInside)" />
+                    <rect x="470" y="208" width="6" height="50" fill="url(#mortarGradInside)" />
+                    <rect x="640" y="208" width="6" height="50" fill="url(#mortarGradInside)" />
+                    
+                    {/* Embedded pipe through center (cross-section view) */}
+                    <ellipse cx="50" cy="150" rx="10" ry="12" fill="url(#pipeGradInside)" stroke="#37474f" strokeWidth="2" />
+                    <rect x="50" y="138" width="700" height="24" fill="url(#pipeGradInside)" stroke="#37474f" strokeWidth="2" />
+                    <ellipse cx="750" cy="150" rx="10" ry="12" fill="url(#pipeGradInside)" stroke="#37474f" strokeWidth="2" />
+                    
+                    {/* Pipe hollow interior */}
+                    <ellipse cx="50" cy="150" rx="6" ry="9" fill="#263238" />
+                    <rect x="50" y="141" width="700" height="18" fill="#263238" />
+                    
+                    {/* Crack with animation */}
+                    <AnimatePresence>
+                      {crackDetected && !healed && (
+                        <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                          <motion.path
+                            d="M 400 75 L 405 110 L 395 145 L 405 180 L 400 215 L 395 225"
+                            stroke={healing ? "#66bb6a" : "#d32f2f"}
+                            strokeWidth={healing ? "6" : "3"}
+                            fill="none"
+                            strokeLinecap="round"
+                            initial={{ pathLength: 0 }}
+                            animate={{ pathLength: 1 }}
+                            transition={{ duration: 1.5, ease: "easeInOut" }}
+                          />
+                          
+                          {/* Solution spray */}
+                          {healing && (
+                            <motion.g>
+                              {[...Array(8)].map((_, i) => (
+                                <motion.circle
+                                  key={i}
+                                  cx={400}
+                                  cy={150}
+                                  r="3"
+                                  fill="#4fc3f7"
+                                  opacity="0.8"
+                                  initial={{ x: 0, y: 0 }}
+                                  animate={{ 
+                                    x: [0, (i - 4) * 15], 
+                                    y: [0, Math.abs(i - 4) * -20] 
+                                  }}
+                                  transition={{ 
+                                    duration: 1.2, 
+                                    delay: i * 0.08, 
+                                    repeat: Number.POSITIVE_INFINITY, 
+                                    repeatDelay: 0.5 
+                                  }}
+                                />
+                              ))}
+                              
+                              {/* Healing particles */}
+                              {[...Array(15)].map((_, i) => (
+                                <motion.circle
+                                  key={`heal-${i}`}
+                                  cx={395 + Math.random() * 10}
+                                  cy={75 + (i * 150) / 15}
+                                  r={2 + Math.random() * 1.5}
+                                  fill="#81c784"
+                                  initial={{ opacity: 0, scale: 0 }}
+                                  animate={{
+                                    opacity: [0, 1, 0],
+                                    scale: [0, 1.5, 0],
+                                  }}
+                                  transition={{
+                                    duration: 1.5,
+                                    delay: i * 0.1,
+                                    repeat: Number.POSITIVE_INFINITY,
+                                    repeatDelay: 0.3,
+                                  }}
+                                />
+                              ))}
+                            </motion.g>
+                          )}
+                        </motion.g>
+                      )}
+                    </AnimatePresence>
+                    
+                    {/* Healed crack */}
+                    {healed && (
+                      <motion.path
+                        d="M 400 75 L 405 110 L 395 145 L 405 180 L 400 215 L 395 225"
+                        stroke="#e0e0e0"
+                        strokeWidth="1.5"
+                        fill="none"
+                        opacity="0.3"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 0.3 }}
+                      />
+                    )}
+                    
+                    {/* Labels */}
+                    <text x="400" y="60" fontSize="14" fontWeight="bold" fill="#fff" textAnchor="middle">
+                      Cross-Section: Solution Sprays from Internal Pipe
+                    </text>
+                  </svg>
+
+                  {/* Status indicator */}
+                  <div className="absolute top-4 right-4">
+                    <AnimatePresence>
+                      {crackDetected && !healed && (
+                        <motion.div
+                          initial={{ scale: 0, rotate: -180 }}
+                          animate={{ scale: 1, rotate: 0 }}
+                          exit={{ scale: 0, rotate: 180 }}
+                          className={`flex items-center gap-2 px-4 py-2 rounded-full ${healing ? "bg-green-500" : "bg-red-500"} text-white font-bold shadow-2xl text-sm`}
+                        >
+                          {healing ? (
+                            <>
+                              <Activity className="w-4 h-4 animate-spin" />
+                              Spraying...
+                            </>
+                          ) : (
+                            <>
+                              <AlertTriangle className="w-4 h-4 animate-bounce" />
+                              Crack!
+                            </>
+                          )}
+                        </motion.div>
+                      )}
+                      {healed && (
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: [0, 1.2, 1] }}
+                          exit={{ scale: 0 }}
+                          className="flex items-center gap-2 px-4 py-2 rounded-full bg-gray-700 text-white font-bold shadow-2xl text-sm"
+                        >
+                          <CheckCircle className="w-4 h-4" />
+                          Sealed!
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </div>
+                
+                <div className="mt-4 grid grid-cols-3 gap-3 text-center">
+                  <Card className={`border-2 shadow-lg ${crackDetected ? "border-red-500 bg-red-50" : "border-gray-300 bg-gray-50"}`}>
+                    <CardContent className="p-3">
+                      <div className="text-lg font-bold text-red-600">Crack</div>
+                      <p className="text-xs text-gray-600">{crackDetected ? "Detected!" : "None"}</p>
+                    </CardContent>
+                  </Card>
+                  <Card className={`border-2 shadow-lg ${healing ? "border-blue-500 bg-blue-50" : "border-gray-300 bg-gray-50"}`}>
+                    <CardContent className="p-3">
+                      <div className="text-lg font-bold text-blue-600">Spray</div>
+                      <p className="text-xs text-gray-600">{healing ? "Active" : "Idle"}</p>
+                    </CardContent>
+                  </Card>
+                  <Card className={`border-2 shadow-lg ${healed ? "border-green-500 bg-green-50" : "border-gray-300 bg-gray-50"}`}>
+                    <CardContent className="p-3">
+                      <div className="text-lg font-bold text-green-600">Sealed</div>
+                      <p className="text-xs text-gray-600">{healed ? "Complete" : "Waiting"}</p>
+                    </CardContent>
+                  </Card>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Outside View - Dispenser */}
+            <Card className="border-2 border-gray-400">
+              <CardHeader className="bg-gradient-to-r from-emerald-600 to-emerald-500 text-white py-4">
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+                    <Droplets className="w-4 h-4" />
+                  </div>
+                  Outside View: Surface Dispenser
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                <div className="relative bg-gradient-to-br from-[#263238] to-[#37474f] rounded-xl p-6 mb-4 min-h-[300px] flex items-center justify-center shadow-inner">
+                  <svg className="absolute inset-0 w-full h-full" viewBox="0 0 800 300" preserveAspectRatio="xMidYMid meet">
+                    <defs>
+                      <pattern id="brickTextureOut" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <circle cx="10" cy="10" r="1" fill="#8d6e63" opacity="0.3" />
+                        <circle cx="5" cy="15" r="0.8" fill="#6d4c41" opacity="0.25" />
+                        <circle cx="16" cy="7" r="0.6" fill="#5d4037" opacity="0.2" />
+                      </pattern>
+                      <linearGradient id="brickGradOut" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#bf8e7a" />
+                        <stop offset="30%" stopColor="#a1887f" />
+                        <stop offset="60%" stopColor="#8d6e63" />
+                        <stop offset="100%" stopColor="#6d4c41" />
+                      </linearGradient>
+                      <linearGradient id="mortarGradOut" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#9e9e9e" />
+                        <stop offset="50%" stopColor="#bdbdbd" />
+                        <stop offset="100%" stopColor="#9e9e9e" />
+                      </linearGradient>
+                      <linearGradient id="dispenserGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#78909c" />
+                        <stop offset="50%" stopColor="#90a4ae" />
+                        <stop offset="100%" stopColor="#78909c" />
+                      </linearGradient>
+                      <radialGradient id="dropGrad">
+                        <stop offset="0%" stopColor="#4fc3f7" stopOpacity="0.8" />
+                        <stop offset="100%" stopColor="#0288d1" stopOpacity="0.4" />
+                      </radialGradient>
+                    </defs>
+                    
+                    {/* Exterior brick wall - Row 1 */}
+                    <rect x="50" y="50" width="160" height="48" fill="url(#brickGradOut)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="50" y="50" width="160" height="48" fill="url(#brickTextureOut)" />
+                    
+                    <rect x="220" y="50" width="160" height="48" fill="url(#brickGradOut)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="220" y="50" width="160" height="48" fill="url(#brickTextureOut)" />
+                    
+                    <rect x="390" y="50" width="160" height="48" fill="url(#brickGradOut)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="390" y="50" width="160" height="48" fill="url(#brickTextureOut)" />
+                    
+                    <rect x="560" y="50" width="160" height="48" fill="url(#brickGradOut)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="560" y="50" width="160" height="48" fill="url(#brickTextureOut)" />
+                    
+                    {/* Horizontal mortar */}
+                    <rect x="50" y="98" width="670" height="6" fill="url(#mortarGradOut)" />
+                    
+                    {/* Row 2 - offset */}
+                    <rect x="50" y="104" width="80" height="48" fill="url(#brickGradOut)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="50" y="104" width="80" height="48" fill="url(#brickTextureOut)" />
+                    
+                    <rect x="140" y="104" width="160" height="48" fill="url(#brickGradOut)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="140" y="104" width="160" height="48" fill="url(#brickTextureOut)" />
+                    
+                    <rect x="310" y="104" width="160" height="48" fill="url(#brickGradOut)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="310" y="104" width="160" height="48" fill="url(#brickTextureOut)" />
+                    
+                    <rect x="480" y="104" width="160" height="48" fill="url(#brickGradOut)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="480" y="104" width="160" height="48" fill="url(#brickTextureOut)" />
+                    
+                    <rect x="650" y="104" width="70" height="48" fill="url(#brickGradOut)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="650" y="104" width="70" height="48" fill="url(#brickTextureOut)" />
+                    
+                    <rect x="50" y="152" width="670" height="6" fill="url(#mortarGradOut)" />
+                    
+                    {/* Row 3 */}
+                    <rect x="50" y="158" width="160" height="48" fill="url(#brickGradOut)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="50" y="158" width="160" height="48" fill="url(#brickTextureOut)" />
+                    
+                    <rect x="220" y="158" width="160" height="48" fill="url(#brickGradOut)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="220" y="158" width="160" height="48" fill="url(#brickTextureOut)" />
+                    
+                    <rect x="390" y="158" width="160" height="48" fill="url(#brickGradOut)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="390" y="158" width="160" height="48" fill="url(#brickTextureOut)" />
+                    
+                    <rect x="560" y="158" width="160" height="48" fill="url(#brickGradOut)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="560" y="158" width="160" height="48" fill="url(#brickTextureOut)" />
+                    
+                    <rect x="50" y="206" width="670" height="6" fill="url(#mortarGradOut)" />
+                    
+                    {/* Row 4 - offset */}
+                    <rect x="50" y="212" width="80" height="48" fill="url(#brickGradOut)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="50" y="212" width="80" height="48" fill="url(#brickTextureOut)" />
+                    
+                    <rect x="140" y="212" width="160" height="48" fill="url(#brickGradOut)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="140" y="212" width="160" height="48" fill="url(#brickTextureOut)" />
+                    
+                    <rect x="310" y="212" width="160" height="48" fill="url(#brickGradOut)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="310" y="212" width="160" height="48" fill="url(#brickTextureOut)" />
+                    
+                    <rect x="480" y="212" width="160" height="48" fill="url(#brickGradOut)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="480" y="212" width="160" height="48" fill="url(#brickTextureOut)" />
+                    
+                    <rect x="650" y="212" width="70" height="48" fill="url(#brickGradOut)" stroke="#5d4037" strokeWidth="2" />
+                    <rect x="650" y="212" width="70" height="48" fill="url(#brickTextureOut)" />
+                    
+                    {/* Vertical mortar lines */}
+                    <rect x="210" y="50" width="6" height="48" fill="url(#mortarGradOut)" />
+                    <rect x="380" y="50" width="6" height="48" fill="url(#mortarGradOut)" />
+                    <rect x="550" y="50" width="6" height="48" fill="url(#mortarGradOut)" />
+                    
+                    <rect x="130" y="104" width="6" height="48" fill="url(#mortarGradOut)" />
+                    <rect x="300" y="104" width="6" height="48" fill="url(#mortarGradOut)" />
+                    <rect x="470" y="104" width="6" height="48" fill="url(#mortarGradOut)" />
+                    <rect x="640" y="104" width="6" height="48" fill="url(#mortarGradOut)" />
+                    
+                    <rect x="210" y="158" width="6" height="48" fill="url(#mortarGradOut)" />
+                    <rect x="380" y="158" width="6" height="48" fill="url(#mortarGradOut)" />
+                    <rect x="550" y="158" width="6" height="48" fill="url(#mortarGradOut)" />
+                    
+                    <rect x="130" y="212" width="6" height="48" fill="url(#mortarGradOut)" />
+                    <rect x="300" y="212" width="6" height="48" fill="url(#mortarGradOut)" />
+                    <rect x="470" y="212" width="6" height="48" fill="url(#mortarGradOut)" />
+                    <rect x="640" y="212" width="6" height="48" fill="url(#mortarGradOut)" />
+                    
+                    {/* Crack with animation */}
+                    <AnimatePresence>
+                      {crackDetected && !healed && (
+                        <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                          <motion.path
+                            d="M 400 90 L 395 130 L 405 170 L 395 210 L 400 250 L 395 270"
+                            stroke={healing ? "#66bb6a" : "#d32f2f"}
+                            strokeWidth={healing ? "7" : "4"}
+                            fill="none"
+                            strokeLinecap="round"
+                            initial={{ pathLength: 0 }}
+                            animate={{ pathLength: 1 }}
+                            transition={{ duration: 1.5, ease: "easeInOut" }}
+                          />
+                          
+                          {/* Crack branches */}
+                          <motion.path
+                            d="M 395 150 L 385 155 L 380 160"
+                            stroke={healing ? "#66bb6a" : "#d32f2f"}
+                            strokeWidth={healing ? "4" : "2"}
+                            fill="none"
+                            initial={{ pathLength: 0 }}
+                            animate={{ pathLength: 1 }}
+                            transition={{ duration: 1, delay: 0.5 }}
+                          />
+                          
+                          {/* Dispenser unit */}
+                          <rect x="330" y="30" width="140" height="50" rx="6" fill="url(#dispenserGrad)" stroke="#455a64" strokeWidth="2" />
+                          <circle cx="365" cy="55" r="6" fill="#37474f" />
+                          <circle cx="435" cy="55" r="6" fill="#37474f" />
+                          <text x="400" y="60" fontSize="10" fontWeight="bold" fill="#fff" textAnchor="middle">DISPENSER</text>
+                          
+                          {/* Mounting bracket */}
+                          <rect x="380" y="20" width="40" height="12" fill="#546e7a" stroke="#37474f" strokeWidth="1" />
+                          
+                          {/* Solution cascade */}
+                          {healing && (
+                            <motion.g>
+                              {[...Array(15)].map((_, i) => (
+                                <motion.ellipse
+                                  key={`drop-${i}`}
+                                  cx={335 + i * 11}
+                                  cy={80}
+                                  rx="3"
+                                  ry="6"
+                                  fill="url(#dropGrad)"
+                                  initial={{ y: 0, opacity: 0 }}
+                                  animate={{ 
+                                    y: [0, 190], 
+                                    opacity: [0, 0.8, 0.6, 0.3] 
+                                  }}
+                                  transition={{ 
+                                    duration: 1.6, 
+                                    delay: i * 0.05, 
+                                    repeat: Number.POSITIVE_INFINITY, 
+                                    repeatDelay: 0.4,
+                                    ease: "easeIn"
+                                  }}
+                                />
+                              ))}
+                              
+                              {/* Flow stream over crack */}
+                              <motion.rect
+                                x="385"
+                                y="80"
+                                width="30"
+                                height="190"
+                                fill="url(#dropGrad)"
+                                opacity="0.4"
+                                initial={{ scaleY: 0 }}
+                                animate={{ scaleY: [0, 1, 1] }}
+                                transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, repeatDelay: 0.5 }}
+                                style={{ transformOrigin: "top" }}
+                              />
+                              
+                              {/* Healing particles spreading */}
+                              {[...Array(12)].map((_, i) => (
+                                <motion.circle
+                                  key={`particle-${i}`}
+                                  cx={395 + Math.random() * 10}
+                                  cy={90 + (i * 180) / 12}
+                                  r={2 + Math.random() * 1.5}
+                                  fill="#81c784"
+                                  initial={{ opacity: 0, scale: 0 }}
+                                  animate={{
+                                    opacity: [0, 1, 0],
+                                    scale: [0, 1.5, 0],
+                                  }}
+                                  transition={{
+                                    duration: 1.5,
+                                    delay: i * 0.12,
+                                    repeat: Number.POSITIVE_INFINITY,
+                                    repeatDelay: 0.3,
+                                  }}
+                                />
+                              ))}
+                            </motion.g>
+                          )}
+                        </motion.g>
+                      )}
+                    </AnimatePresence>
+                    
+                    {/* Healed crack */}
+                    {healed && (
+                      <motion.path
+                        d="M 400 90 L 395 130 L 405 170 L 395 210 L 400 250 L 395 270"
+                        stroke="#e0e0e0"
+                        strokeWidth="2"
+                        fill="none"
+                        opacity="0.3"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 0.3 }}
+                      />
+                    )}
+                    
+                    {/* Labels */}
+                    <text x="400" y="20" fontSize="14" fontWeight="bold" fill="#fff" textAnchor="middle">
+                      Exterior: Solution Cascades Over Wall
+                    </text>
+                  </svg>
+
+                  {/* Status indicator */}
+                  <div className="absolute top-4 right-4">
+                    <AnimatePresence>
+                      {crackDetected && !healed && (
+                        <motion.div
+                          initial={{ scale: 0, rotate: -180 }}
+                          animate={{ scale: 1, rotate: 0 }}
+                          exit={{ scale: 0, rotate: 180 }}
+                          className={`flex items-center gap-2 px-4 py-2 rounded-full ${healing ? "bg-green-500" : "bg-red-500"} text-white font-bold shadow-2xl text-sm`}
+                        >
+                          {healing ? (
+                            <>
+                              <Activity className="w-4 h-4 animate-spin" />
+                              Dispensing...
+                            </>
+                          ) : (
+                            <>
+                              <AlertTriangle className="w-4 h-4 animate-bounce" />
+                              Crack!
+                            </>
+                          )}
+                        </motion.div>
+                      )}
+                      {healed && (
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: [0, 1.2, 1] }}
+                          exit={{ scale: 0 }}
+                          className="flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-600 text-white font-bold shadow-2xl text-sm"
+                        >
+                          <CheckCircle className="w-4 h-4" />
+                          Fixed!
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </div>
+                
+                <div className="mt-4 grid grid-cols-3 gap-3 text-center">
+                  <Card className={`border-2 shadow-lg ${crackDetected ? "border-red-500 bg-red-50" : "border-gray-300 bg-gray-50"}`}>
+                    <CardContent className="p-3">
+                      <div className="text-lg font-bold text-red-600">Visible</div>
+                      <p className="text-xs text-gray-600">{crackDetected ? "Crack!" : "No Damage"}</p>
+                    </CardContent>
+                  </Card>
+                  <Card className={`border-2 shadow-lg ${healing ? "border-blue-500 bg-blue-50" : "border-gray-300 bg-gray-50"}`}>
+                    <CardContent className="p-3">
+                      <div className="text-lg font-bold text-blue-600">Cascade</div>
+                      <p className="text-xs text-gray-600">{healing ? "Flowing" : "Standby"}</p>
+                    </CardContent>
+                  </Card>
+                  <Card className={`border-2 shadow-lg ${healed ? "border-green-500 bg-green-50" : "border-gray-300 bg-gray-50"}`}>
+                    <CardContent className="p-3">
+                      <div className="text-lg font-bold text-green-600">Restored</div>
+                      <p className="text-xs text-gray-600">{healed ? "Success" : "Pending"}</p>
+                    </CardContent>
+                  </Card>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </motion.div>
+
         {/* Enhanced info banner */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
+          transition={{ delay: 0.8 }}
           className="mt-8"
         >
           <Card className="border-2 border-gray-400 bg-gradient-to-r from-gray-100 via-white to-gray-100 shadow-2xl">

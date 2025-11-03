@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
-import { Shield, Zap, TrendingUp, ArrowLeft, AlertCircle, CheckCircle, Activity, ShoppingCart } from "lucide-react"
+import { Shield, Zap, TrendingUp, ArrowLeft, AlertCircle, CheckCircle, Activity, ShoppingCart, Droplets } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 import { ScrollProgress } from "@/components/scroll-progress"
@@ -322,9 +322,7 @@ export default function SelfHealingSystemsPage() {
                   </TableHeader>
                   <TableBody>
                     {[
-                      { item: "Cement", quantity: "1 cup (~250 g)", purpose: "Binder", cost: "5" },
-                      { item: "Sand", quantity: "2 cups (~500 g)", purpose: "Filler", cost: "2" },
-                      { item: "Baking Soda", quantity: "2-3 tsp (~10-15 g)", purpose: "Healing agent", cost: "3" },
+                      { item: "Cement Mixture", quantity: "Pre-mixed (4 cups total)", purpose: "Complete healing concrete blend", cost: "12", highlight: true },
                       { item: "Water", quantity: "½ cup (~120-140 mL)", purpose: "Mixing", cost: "1" },
                       { item: "CaCl₂ Solution", quantity: "10-15 g / 100 mL water", purpose: "Healing trigger", cost: "8" },
                       { item: "Copper Foil Tape", quantity: "5-10 mm strips", purpose: "Crack sensor", cost: "4" },
@@ -337,24 +335,27 @@ export default function SelfHealingSystemsPage() {
                     ].map((row, i) => (
                       <motion.tr
                         key={i}
-                        className="border-gray-200 hover:bg-gray-50"
+                        className={`border-gray-200 ${row.highlight ? 'bg-emerald-50 hover:bg-emerald-100' : 'hover:bg-gray-50'}`}
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ delay: i * 0.1 }}
                         viewport={{ once: true }}
                       >
-                        <TableCell className="font-medium text-gray-900">{row.item}</TableCell>
-                        <TableCell className="text-gray-700">{row.quantity}</TableCell>
-                        <TableCell className="text-gray-700">{row.purpose}</TableCell>
-                        <TableCell className="text-gray-900 text-right font-semibold">AED {row.cost}</TableCell>
+                        <TableCell className={`font-medium ${row.highlight ? 'text-emerald-900' : 'text-gray-900'}`}>{row.item}</TableCell>
+                        <TableCell className={row.highlight ? 'text-emerald-800' : 'text-gray-700'}>{row.quantity}</TableCell>
+                        <TableCell className={row.highlight ? 'text-emerald-800' : 'text-gray-700'}>{row.purpose}</TableCell>
+                        <TableCell className={`text-right font-semibold ${row.highlight ? 'text-emerald-900' : 'text-gray-900'}`}>AED {row.cost}</TableCell>
                         <TableCell className="text-center">
                           <Button
                             size="sm"
                             onClick={handlePurchase}
-                            className="bg-gray-700 hover:bg-gray-800 text-white"
+                            className={row.highlight 
+                              ? "bg-emerald-600 hover:bg-emerald-700 text-white font-semibold" 
+                              : "bg-gray-700 hover:bg-gray-800 text-white"
+                            }
                           >
                             <ShoppingCart className="w-4 h-4 mr-1" />
-                            Buy
+                            {row.highlight ? 'Buy Now' : 'Buy'}
                           </Button>
                         </TableCell>
                       </motion.tr>
@@ -363,7 +364,7 @@ export default function SelfHealingSystemsPage() {
                       <TableCell colSpan={3} className="font-bold text-gray-900">
                         Total Estimated Cost
                       </TableCell>
-                      <TableCell className="text-right font-bold text-gray-700 text-lg">AED 29</TableCell>
+                      <TableCell className="text-right font-bold text-gray-700 text-lg">AED 41</TableCell>
                       <TableCell className="text-center">
                         <Button
                           onClick={handlePurchase}
@@ -512,6 +513,330 @@ export default function SelfHealingSystemsPage() {
               </div>
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      {/* Live Demo: Brick Cross-Section Views */}
+      <section className="py-20 bg-white relative overflow-hidden">
+        <div className="container mx-auto px-4">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-4">Live Demonstration</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Two perspectives of self-healing concrete in action
+            </p>
+          </motion.div>
+
+          <div className="max-w-6xl mx-auto space-y-12">
+            {/* Inside View - Pipe System */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <Card className="border-2 border-gray-300 overflow-hidden">
+                <CardHeader className="bg-gradient-to-r from-gray-700 to-gray-600 text-white">
+                  <CardTitle className="font-display text-2xl flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                      <Shield className="w-6 h-6" />
+                    </div>
+                    Inside View: Cross-Section with Embedded Pipe
+                  </CardTitle>
+                  <p className="text-white/80 mt-2">Healing solution delivered through internal pipe network</p>
+                </CardHeader>
+                <CardContent className="p-8">
+                  <div className="relative bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg p-8 min-h-[400px] flex items-center justify-center border-4 border-gray-400">
+                    {/* Cross-section background */}
+                    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 800 400">
+                      <defs>
+                        <pattern id="brickTexture" width="20" height="20" patternUnits="userSpaceOnUse">
+                          <circle cx="10" cy="10" r="1" fill="#8d6e63" opacity="0.3" />
+                        </pattern>
+                        <linearGradient id="brickGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#a1887f" />
+                          <stop offset="50%" stopColor="#8d6e63" />
+                          <stop offset="100%" stopColor="#6d4c41" />
+                        </linearGradient>
+                        <linearGradient id="pipeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stopColor="#90a4ae" />
+                          <stop offset="50%" stopColor="#607d8b" />
+                          <stop offset="100%" stopColor="#455a64" />
+                        </linearGradient>
+                        <filter id="glow">
+                          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                          <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                          </feMerge>
+                        </filter>
+                      </defs>
+                      
+                      {/* Brick cross-section (cut in half) */}
+                      <rect x="50" y="100" width="700" height="200" fill="url(#brickGradient)" stroke="#5d4037" strokeWidth="3" />
+                      <rect x="50" y="100" width="700" height="200" fill="url(#brickTexture)" />
+                      
+                      {/* Horizontal pipe through center */}
+                      <ellipse cx="50" cy="200" rx="15" ry="20" fill="url(#pipeGradient)" stroke="#37474f" strokeWidth="2" />
+                      <rect x="50" y="180" width="700" height="40" fill="url(#pipeGradient)" stroke="#37474f" strokeWidth="2" />
+                      <ellipse cx="750" cy="200" rx="15" ry="20" fill="url(#pipeGradient)" stroke="#37474f" strokeWidth="2" />
+                      
+                      {/* Pipe interior (hollow) */}
+                      <ellipse cx="50" cy="200" rx="10" ry="15" fill="#263238" />
+                      <rect x="50" y="185" width="700" height="30" fill="#263238" />
+                      
+                      {/* Crack - zigzag pattern */}
+                      <motion.path
+                        d="M 400 100 L 405 130 L 395 160 L 405 190 L 400 220 L 395 250 L 400 280 L 405 300"
+                        stroke="#ff1744"
+                        strokeWidth="3"
+                        fill="none"
+                        strokeDasharray="5,5"
+                        initial={{ pathLength: 0, opacity: 0 }}
+                        animate={{ pathLength: 1, opacity: 1 }}
+                        transition={{ duration: 2, ease: "easeInOut" }}
+                      />
+                      
+                      {/* Solution spray from pipe (animated) */}
+                      <motion.g
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: [0, 1, 1, 0] }}
+                        transition={{ duration: 3, delay: 2, repeat: Infinity, repeatDelay: 2 }}
+                      >
+                        {[...Array(8)].map((_, i) => (
+                          <motion.circle
+                            key={i}
+                            cx={400}
+                            cy={200}
+                            r="4"
+                            fill="#4fc3f7"
+                            opacity="0.8"
+                            initial={{ x: 0, y: 0 }}
+                            animate={{ 
+                              x: [0, (i - 4) * 15], 
+                              y: [0, Math.abs(i - 4) * -20] 
+                            }}
+                            transition={{ duration: 1.5, delay: 2 + i * 0.1, repeat: Infinity, repeatDelay: 3.5 }}
+                          />
+                        ))}
+                      </motion.g>
+                      
+                      {/* CaCO3 filling crack (healing) */}
+                      <motion.path
+                        d="M 400 220 L 395 250 L 400 280 L 405 300"
+                        stroke="#e0e0e0"
+                        strokeWidth="6"
+                        fill="none"
+                        initial={{ pathLength: 0, opacity: 0 }}
+                        animate={{ pathLength: 1, opacity: 0.9 }}
+                        transition={{ duration: 2, delay: 3.5, ease: "easeInOut" }}
+                        filter="url(#glow)"
+                      />
+                      
+                      {/* Labels */}
+                      <text x="400" y="80" fontSize="16" fontWeight="bold" fill="#424242" textAnchor="middle">
+                        Concrete Cross-Section
+                      </text>
+                      <text x="400" y="350" fontSize="14" fill="#616161" textAnchor="middle">
+                        Healing Solution Sprays from Pipe → Seals Crack
+                      </text>
+                    </svg>
+                  </div>
+                  
+                  <div className="mt-6 grid grid-cols-3 gap-4 text-center">
+                    <div className="bg-red-50 p-4 rounded-lg border border-red-200">
+                      <div className="text-2xl font-bold text-red-600">1. Crack Forms</div>
+                      <p className="text-sm text-gray-600 mt-1">Structural damage detected</p>
+                    </div>
+                    <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                      <div className="text-2xl font-bold text-blue-600">2. Solution Sprays</div>
+                      <p className="text-sm text-gray-600 mt-1">CaCl₂ mist from pipe</p>
+                    </div>
+                    <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                      <div className="text-2xl font-bold text-green-600">3. Crack Sealed</div>
+                      <p className="text-sm text-gray-600 mt-1">CaCO₃ fills gap</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Outside View - Dispenser System */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <Card className="border-2 border-gray-300 overflow-hidden">
+                <CardHeader className="bg-gradient-to-r from-emerald-600 to-emerald-500 text-white">
+                  <CardTitle className="font-display text-2xl flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                      <Droplets className="w-6 h-6" />
+                    </div>
+                    Outside View: Surface Dispenser Application
+                  </CardTitle>
+                  <p className="text-white/80 mt-2">Healing solution dispensed over entire wall surface</p>
+                </CardHeader>
+                <CardContent className="p-8">
+                  <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-8 min-h-[400px] flex items-center justify-center border-4 border-emerald-300">
+                    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 800 400">
+                      <defs>
+                        <pattern id="brickPattern" width="80" height="40" patternUnits="userSpaceOnUse">
+                          <rect width="78" height="38" x="1" y="1" fill="url(#brickGradient)" stroke="#795548" strokeWidth="2" />
+                        </pattern>
+                        <linearGradient id="dispenserGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stopColor="#78909c" />
+                          <stop offset="50%" stopColor="#90a4ae" />
+                          <stop offset="100%" stopColor="#78909c" />
+                        </linearGradient>
+                        <radialGradient id="dropletGradient">
+                          <stop offset="0%" stopColor="#4fc3f7" stopOpacity="0.8" />
+                          <stop offset="100%" stopColor="#0288d1" stopOpacity="0.4" />
+                        </radialGradient>
+                      </defs>
+                      
+                      {/* Brick wall exterior */}
+                      <rect x="100" y="120" width="600" height="240" fill="url(#brickPattern)" stroke="#5d4037" strokeWidth="3" />
+                      
+                      {/* Visible crack on surface */}
+                      <motion.path
+                        d="M 400 120 L 395 160 L 405 200 L 395 240 L 400 280 L 395 320 L 400 360"
+                        stroke="#ff1744"
+                        strokeWidth="4"
+                        fill="none"
+                        strokeDasharray="8,4"
+                        initial={{ pathLength: 0, opacity: 0 }}
+                        animate={{ pathLength: 1, opacity: 1 }}
+                        transition={{ duration: 2, ease: "easeInOut" }}
+                      />
+                      
+                      {/* Dispenser unit at top */}
+                      <rect x="320" y="40" width="160" height="60" rx="8" fill="url(#dispenserGradient)" stroke="#455a64" strokeWidth="2" />
+                      <circle cx="360" cy="70" r="8" fill="#37474f" />
+                      <circle cx="440" cy="70" r="8" fill="#37474f" />
+                      <text x="400" y="75" fontSize="12" fontWeight="bold" fill="#fff" textAnchor="middle">
+                        DISPENSER
+                      </text>
+                      
+                      {/* Mounting bracket */}
+                      <rect x="380" y="30" width="40" height="15" fill="#546e7a" stroke="#37474f" strokeWidth="1" />
+                      
+                      {/* Solution cascade/waterfall effect */}
+                      <motion.g
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: [0, 0.8, 0.8, 0] }}
+                        transition={{ duration: 4, delay: 2, repeat: Infinity, repeatDelay: 1 }}
+                      >
+                        {/* Wide spray pattern */}
+                        {[...Array(15)].map((_, i) => (
+                          <motion.ellipse
+                            key={`drop-${i}`}
+                            cx={320 + i * 11}
+                            cy={100}
+                            rx="3"
+                            ry="6"
+                            fill="url(#dropletGradient)"
+                            initial={{ y: 0, opacity: 0 }}
+                            animate={{ 
+                              y: [0, 260], 
+                              opacity: [0, 0.8, 0.6, 0.3] 
+                            }}
+                            transition={{ 
+                              duration: 2, 
+                              delay: 2 + i * 0.05, 
+                              repeat: Infinity, 
+                              repeatDelay: 3,
+                              ease: "easeIn"
+                            }}
+                          />
+                        ))}
+                        
+                        {/* Flowing solution over crack */}
+                        <motion.rect
+                          x="385"
+                          y="100"
+                          width="30"
+                          height="260"
+                          fill="url(#dropletGradient)"
+                          opacity="0.4"
+                          initial={{ scaleY: 0 }}
+                          animate={{ scaleY: [0, 1, 1] }}
+                          transition={{ duration: 2, delay: 2.5, repeat: Infinity, repeatDelay: 3 }}
+                          style={{ transformOrigin: "top" }}
+                        />
+                      </motion.g>
+                      
+                      {/* Healed crack (white CaCO3) */}
+                      <motion.path
+                        d="M 400 240 L 395 280 L 400 320 L 395 360"
+                        stroke="#f5f5f5"
+                        strokeWidth="8"
+                        fill="none"
+                        initial={{ pathLength: 0, opacity: 0 }}
+                        animate={{ pathLength: 1, opacity: 1 }}
+                        transition={{ duration: 2, delay: 4.5, ease: "easeOut" }}
+                        filter="url(#glow)"
+                      />
+                      
+                      {/* Labels */}
+                      <text x="400" y="25" fontSize="16" fontWeight="bold" fill="#424242" textAnchor="middle">
+                        Brick Wall - Exterior View
+                      </text>
+                      <text x="400" y="390" fontSize="14" fill="#616161" textAnchor="middle">
+                        Solution Cascades Over Surface → Complete Crack Coverage
+                      </text>
+                    </svg>
+                  </div>
+                  
+                  <div className="mt-6 grid grid-cols-3 gap-4 text-center">
+                    <div className="bg-red-50 p-4 rounded-lg border border-red-200">
+                      <div className="text-2xl font-bold text-red-600">1. Crack Visible</div>
+                      <p className="text-sm text-gray-600 mt-1">Surface damage appears</p>
+                    </div>
+                    <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                      <div className="text-2xl font-bold text-blue-600">2. Solution Flows</div>
+                      <p className="text-sm text-gray-600 mt-1">Dispenser releases healing agent</p>
+                    </div>
+                    <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                      <div className="text-2xl font-bold text-green-600">3. Wall Restored</div>
+                      <p className="text-sm text-gray-600 mt-1">Full surface treatment</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </div>
+
+          {/* Comparison Note */}
+          <motion.div
+            className="max-w-4xl mx-auto mt-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Card className="bg-gradient-to-r from-gray-700 to-gray-600 text-white border-0">
+              <CardContent className="p-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                    <Activity className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-xl font-bold mb-2">Two Healing Approaches</h3>
+                    <p className="text-white/90 leading-relaxed">
+                      <strong>Inside System:</strong> Ideal for structural elements with embedded infrastructure - healing solution reaches deep internal cracks through pipe network.
+                      {" "}<strong>Outside System:</strong> Perfect for existing structures and surface repairs - dispenser treats entire wall area ensuring comprehensive coverage.
+                      Both methods trigger the same CaCO₃ precipitation reaction for permanent crack sealing.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
         </div>
       </section>
 
